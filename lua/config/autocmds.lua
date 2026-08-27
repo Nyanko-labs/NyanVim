@@ -61,11 +61,13 @@ autocmd("CursorHold", {
 })
 
 local function set_transparent_bg()
-  vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
-  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", ctermbg = "NONE" })
-  vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE", ctermbg = "NONE" })
-  vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", ctermbg = "NONE" })
-  vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE", ctermbg = "NONE" })
+  -- nvim_set_hl replaces the whole group; merge so fg survives the bg clear
+  for _, group in ipairs({ "Normal", "NormalFloat", "NormalNC", "SignColumn", "EndOfBuffer" }) do
+    local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+    hl.bg = nil
+    hl.ctermbg = nil
+    vim.api.nvim_set_hl(0, group, hl)
+  end
 end
 
 local transparent_group = augroup("TransparentBackground", { clear = true })
