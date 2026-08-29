@@ -37,9 +37,11 @@ return {
   { "sindrets/diffview.nvim", dependencies = "nvim-lua/plenary.nvim" },
   { "kdheepak/lazygit.nvim", dependencies = "nvim-lua/plenary.nvim" },
   {
-    "ahmedkhalf/project.nvim",
+    -- maintained fork of ahmedkhalf/project.nvim (upstream is abandoned and
+    -- calls deprecated vim.lsp.buf_get_clients on startup)
+    "DrKJeff16/project.nvim",
     config = function()
-      require("project_nvim").setup()
+      require("project").setup()
     end,
   },
   {

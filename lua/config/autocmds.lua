@@ -51,8 +51,6 @@ autocmd("BufWritePre", {
 
 local lsp = augroup("LSP", { clear = true })
 
--- Format on save handled by conform.nvim (lua/plugins/conform.lua)
-
 autocmd("CursorHold", {
   group = lsp,
   callback = function()
@@ -113,30 +111,7 @@ vim.api.nvim_create_user_command("SmartSplit", function()
   vim.cmd(smart_split())
 end, {})
 
-local sidebar_group = augroup("SidebarManagement", { clear = true })
-
-autocmd("FileType", {
-  group = sidebar_group,
-  pattern = "NvimTree",
-  callback = function()
-    vim.cmd("wincmd L")
-    vim.cmd("vertical resize 40")
-    vim.cmd("set winfixwidth")
-  end,
-})
-
-autocmd("VimResized", {
-  group = sidebar_group,
-  callback = function()
-    local wins = vim.api.nvim_tabpage_list_wins(0)
-    for _, win in ipairs(wins) do
-      local ft = vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(win), "filetype")
-      if ft == "NvimTree" then
-        vim.api.nvim_win_set_width(win, 40)
-      end
-    end
-  end,
-})
+-- Tree position/width live in nvim-tree's own view config (lua/plugins/ui.lua)
 
 autocmd("BufEnter", {
   group = augroup("NvimTreePyCharmBehavior", { clear = true }),
@@ -148,77 +123,6 @@ autocmd("BufEnter", {
     end
     if view.is_visible() then
       api.tree.find_file({ open = true, focus = false })
-    end
-  end,
-})
-
-autocmd("BufEnter", {
-  group = augroup("NvimTreeHighlight", { clear = true }),
-  callback = function()
-    if vim.bo.filetype ~= "NvimTree" then
-      local api = require('nvim-tree.api')
-      api.tree.find_file({ focus = false })
-    end
-  end,
-})
-
-local copilot_group = augroup("CopilotGroup", { clear = true })
-
-autocmd("FileType", {
-  group = copilot_group,
-  pattern = { "TelescopePrompt", "markdown", "help", "txt" },
-  callback = function()
-    local ok, _ = pcall(require, "copilot.client")
-    if ok then
-      vim.cmd("Copilot disable")
-    end
-  end,
-})
-
-local function safe_copilot_cmd(cmd)
-  local ok, _ = pcall(vim.cmd, "Copilot " .. cmd)
-  if not ok then return false end
-  return true
-end
-
-autocmd("InsertEnter", {
-  group = copilot_group,
-  callback = function()
-    safe_copilot_cmd("enable")
-  end,
-})
-
-autocmd("BufEnter", {
-  group = copilot_group,
-  callback = function()
-    local ok, copilot_api = pcall(require, "copilot.api")
-    if ok then
-      local status_ok, _ = pcall(function()
-        vim.opt_local.statusline = vim.opt_local.statusline +
-          string.format(' %%{%s}', 'v:lua.require("copilot.api").status.data.message')
-      end)
-      if not status_ok then end
-    end
-  end,
-})
-
-autocmd("FileType", {
-  group = augroup("NvimTreePosition", { clear = true }),
-  pattern = "NvimTree",
-  callback = function()
-    vim.cmd("wincmd L")
-    vim.cmd("vertical resize 35")
-    vim.cmd("set winfixwidth")
-  end,
-})
-
-autocmd("VimResized", {
-  group = augroup("NvimTreeResize", { clear = true }),
-  callback = function()
-    local view = require("nvim-tree.view")
-    if view.is_visible() then
-      vim.cmd("wincmd L")
-      vim.cmd("vertical resize 35")
     end
   end,
 })

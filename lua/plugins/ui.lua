@@ -5,7 +5,7 @@ return {
     config = function()
       require("nvim-tree").setup({
         sort_by = "case_sensitive",
-        view = { width = 30 },
+        view = { side = "right", width = 35 },
         filters = { dotfiles = true },
       })
     end,
