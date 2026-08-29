@@ -36,7 +36,7 @@ A hand-rolled Neovim config — IDE features, fast startup, VSCode-like feel —
 - **Git** — gitsigns, diffview, lazygit.
 - **Editor** — toggleterm, autopairs, Comment.nvim, todo-comments, project.nvim.
 - **Keymap discovery** — which-key (v3).
-- **Theme** — tokyonight-moon re-grounded on the **ARASAKA** palette (Cyberpunk 2077) + solarized-osaka as fallback (`:colorscheme solarized-osaka`).
+- **Theme** — **LUCY**: [solarized-osaka](https://github.com/craftzdog/solarized-osaka.nvim) (Cyberpunk: Edgerunners), a calm cool-teal palette shared across the whole stack.
 - **Discipline** — habit-trainer that nags on `hjkl`/arrow spamming.
 
 ## Requirements
@@ -146,20 +146,21 @@ lua/
     init.lua · health.lua · discipline.lua
 ```
 
-## Theme — ARASAKA
+## Theme — LUCY
 
-The default colorscheme is tokyonight-moon with its palette rewritten in
-`lua/plugins/colorscheme.lua` (`on_colors`) to the ARASAKA night-city set:
+The default colorscheme is [solarized-osaka](https://github.com/craftzdog/solarized-osaka.nvim)
+(set in `lua/plugins/colorscheme.lua`) — a calm cool-teal cyberpunk
+(Edgerunners / Lucy) whose night-city set is:
 
 | Token | Hex | Where |
 |-------|-----|-------|
-| black-red | `#080002` | background — matches the terminal ground |
-| red | `#ff1e3c` | keywords, active states |
-| blue | `#00b4ff` | functions, borders |
-| magenta | `#ff29d4` | numbers, Telescope frame |
-| neon cyan | `#00ffc8` | cursor line nr, Telescope matching |
-| mint | `#7dffb5` | strings (matrix green `#39ff88` is accent-only) |
-| yellow | `#fce300` | warnings, operators |
+| teal-black | `#00141a` | background — matches the terminal ground |
+| cyan | `#2aa298` | keywords, active states |
+| blue | `#2f879d` | functions, borders |
+| magenta | `#d33682` | numbers, Telescope frame |
+| cyan bright | `#4fd1c5` | cursor line nr, Telescope matching |
+| green | `#859900` | strings, success |
+| yellow | `#b28600` | warnings, operators |
 
 Pairs with the same palette across tmux, Ghostty, kitty, WezTerm, starship and
 Übersicht — see [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
