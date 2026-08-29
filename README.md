@@ -162,7 +162,7 @@ The default colorscheme is tokyonight-moon with its palette rewritten in
 | yellow | `#fce300` | warnings, operators |
 
 Pairs with the same palette across tmux, Ghostty, kitty, WezTerm, starship and
-sketchybar — see [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
+Übersicht — see [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
 
 ## Customize
 
