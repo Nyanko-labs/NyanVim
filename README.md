@@ -36,7 +36,7 @@ A hand-rolled Neovim config — IDE features, fast startup, VSCode-like feel —
 - **Git** — gitsigns, diffview, lazygit.
 - **Editor** — toggleterm, autopairs, Comment.nvim, todo-comments, project.nvim.
 - **Keymap discovery** — which-key (v3).
-- **Theme** — tokyonight-moon re-grounded on the **H4CK3R // LUCY** palette (Cyberpunk: Edgerunners) + solarized-osaka as fallback (`:colorscheme solarized-osaka`).
+- **Theme** — tokyonight-moon re-grounded on the **ARASAKA** palette (Cyberpunk 2077) + solarized-osaka as fallback (`:colorscheme solarized-osaka`).
 - **Discipline** — habit-trainer that nags on `hjkl`/arrow spamming.
 
 ## Requirements
@@ -146,20 +146,20 @@ lua/
     init.lua · health.lua · discipline.lua
 ```
 
-## Theme — H4CK3R // LUCY
+## Theme — ARASAKA
 
 The default colorscheme is tokyonight-moon with its palette rewritten in
-`lua/plugins/colorscheme.lua` (`on_colors`) to the Lucy Kushinada night-city set:
+`lua/plugins/colorscheme.lua` (`on_colors`) to the ARASAKA night-city set:
 
 | Token | Hex | Where |
 |-------|-----|-------|
-| night navy | `#0a0a1a` | background — matches the terminal ground |
-| magenta | `#ff2a7a` | keywords, active states |
-| lucy blue | `#45c2f0` | functions, borders |
-| violet | `#b967ff` | numbers, Telescope frame |
-| neon cyan | `#00e5ff` | cursor line nr, Telescope matching |
-| mint | `#7dff9e` | strings (full matrix `#00ff41` is accent-only) |
-| gold | `#ffa600` | warnings, operators |
+| black-red | `#080002` | background — matches the terminal ground |
+| red | `#ff1e3c` | keywords, active states |
+| blue | `#00b4ff` | functions, borders |
+| magenta | `#ff29d4` | numbers, Telescope frame |
+| neon cyan | `#00ffc8` | cursor line nr, Telescope matching |
+| mint | `#7dffb5` | strings (matrix green `#39ff88` is accent-only) |
+| yellow | `#fce300` | warnings, operators |
 
 Pairs with the same palette across tmux, Ghostty, kitty, WezTerm, starship and
 sketchybar — see [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
