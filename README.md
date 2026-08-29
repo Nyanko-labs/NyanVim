@@ -36,7 +36,7 @@ A hand-rolled Neovim config — IDE features, fast startup, VSCode-like feel —
 - **Git** — gitsigns, diffview, lazygit.
 - **Editor** — toggleterm, autopairs, Comment.nvim, todo-comments, project.nvim.
 - **Keymap discovery** — which-key (v3).
-- **Theme** — **LUCY**: [solarized-osaka](https://github.com/craftzdog/solarized-osaka.nvim) (Cyberpunk: Edgerunners), a calm cool-teal palette shared across the whole stack.
+- **Theme** — **BOX UK Contrast**: the [solarized-osaka](https://github.com/craftzdog/solarized-osaka.nvim) engine with its palette overridden to the Box UK set (ported from the [vonqo](https://github.com/vonqo/vonqo) IntelliJ theme), a calm deep blue-grey + teal palette shared across the whole stack.
 - **Discipline** — habit-trainer that nags on `hjkl`/arrow spamming.
 
 ## Requirements
@@ -146,21 +146,21 @@ lua/
     init.lua · health.lua · discipline.lua
 ```
 
-## Theme — LUCY
+## Theme — BOX UK Contrast
 
-The default colorscheme is [solarized-osaka](https://github.com/craftzdog/solarized-osaka.nvim)
-(set in `lua/plugins/colorscheme.lua`) — a calm cool-teal cyberpunk
-(Edgerunners / Lucy) whose night-city set is:
+The colorscheme is the [solarized-osaka](https://github.com/craftzdog/solarized-osaka.nvim)
+engine with its palette overridden to **Box UK Contrast** in
+`lua/plugins/colorscheme.lua` (`on_colors`) — a calm deep blue-grey + teal set:
 
 | Token | Hex | Where |
 |-------|-----|-------|
-| teal-black | `#00141a` | background — matches the terminal ground |
-| cyan | `#2aa298` | keywords, active states |
-| blue | `#2f879d` | functions, borders |
-| magenta | `#d33682` | numbers, Telescope frame |
-| cyan bright | `#4fd1c5` | cursor line nr, Telescope matching |
-| green | `#859900` | strings, success |
-| yellow | `#b28600` | warnings, operators |
+| blue-grey | `#161e22` | background — matches the terminal ground |
+| cyan | `#017c9d` | keywords, active states |
+| green | `#019d76` | functions, classes |
+| purple | `#b750ae` | numbers, Telescope frame |
+| teal | `#15b8ae` | cursor line nr, strings, Telescope matching |
+| coral | `#f77669` | errors, deleted |
+| yellow | `#ffcb6e` | warnings, operators |
 
 Pairs with the same palette across tmux, Ghostty, kitty, WezTerm, starship and
 Übersicht — see [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
