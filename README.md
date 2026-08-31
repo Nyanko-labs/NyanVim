@@ -28,7 +28,8 @@ A hand-rolled Neovim config — IDE features, fast startup, VSCode-like feel —
 ## Features
 
 - **Claude in the editor** — [`coder/claudecode.nvim`](https://github.com/coder/claudecode.nvim): run the Claude Code CLI in a split, send selections/buffers, apply diffs. No API key.
-- **LSP** — mason + nvim-lspconfig on the modern `vim.lsp.config`/`vim.lsp.enable` API (Neovim 0.11+). 8 servers auto-installed.
+- **LSP** — mason + nvim-lspconfig on the modern `vim.lsp.config` API (Neovim 0.11+). 7 servers pre-installed; anything added via `:MasonInstall` is auto-enabled (mason-lspconfig v2). Inline diagnostics on.
+- **Single-owner keymaps** — every global map lives in `config/keymaps.lua`; which-key only labels the groups.
 - **Completion** — nvim-cmp + LuaSnip + lspkind.
 - **Fuzzy finding** — Telescope (fzf-native, ui-select, projects, neoclip).
 - **Syntax** — Treesitter (highlight + indent).
@@ -103,7 +104,7 @@ Leader key: **`<Space>`**
 | `K` | Hover docs |
 | `<Space>rn` | Rename symbol |
 | `<Space>ca` | Code actions |
-| `<Space>f` | Format buffer |
+| `<Space>cf` | Format buffer |
 
 ### AI / Claude
 | Key | Action |
@@ -117,13 +118,16 @@ Leader key: **`<Space>`**
 | `<Space>ar` / `<Space>aC` | Resume / Continue session |
 | `<Space>am` | Select model |
 
-### Tools
+### Git & Tools
 | Key | Action |
 |-----|--------|
+| `<Space>gg` | LazyGit |
+| `<Space>gd` | Diffview |
+| `<Space>gs` / `gb` / `gc` | Git status / branches / commits |
+| `<Space>pp` | Switch project |
 | `<Space>t` | Toggle terminal |
 | `<C-\>` | Toggle floating terminal |
-| `:Mason` | LSP/tool installer |
-| `:LazyGit` | Git UI |
+| `<Space>cm` / `:Mason` | LSP/tool installer |
 | `:Dashboard` | NyanVim dashboard |
 
 Press `<Space>` and wait to browse all groups via which-key.
@@ -136,9 +140,9 @@ lua/
   config/
     lazy.lua             -- bootstrap + { import = "plugins" }
     options.lua          -- editor options
-    keymaps.lua          -- direct keymaps
+    keymaps.lua          -- ALL global keymaps (single owner)
     autocmds.lua         -- autocommands
-    which-key.lua        -- <leader> group definitions
+    which-key.lua        -- <leader> group labels only
   plugins/               -- one concern per file, all auto-imported
     colorscheme · ui · dashboard · telescope · lsp
     treesitter · editor · which-key · claudecode
@@ -152,15 +156,18 @@ The colorscheme is the [solarized-osaka](https://github.com/craftzdog/solarized-
 engine with its palette overridden to **Box UK Contrast** in
 `lua/plugins/colorscheme.lua` (`on_colors`) — a calm deep blue-grey + teal set:
 
+The background is transparent (owned by the colorscheme, not an autocmd) —
+the terminal supplies the matching `#161e22` ground.
+
 | Token | Hex | Where |
 |-------|-----|-------|
-| blue-grey | `#161e22` | background — matches the terminal ground |
-| cyan | `#017c9d` | keywords, active states |
-| green | `#019d76` | functions, classes |
-| purple | `#b750ae` | numbers, Telescope frame |
-| teal | `#15b8ae` | cursor line nr, strings, Telescope matching |
+| blue-grey | `#161e22` | terminal ground behind the transparent bg |
+| cyan | `#017c9d` | functions, properties, borders |
+| green | `#019d76` | keywords |
+| teal | `#15b8ae` | strings, numbers, cursor line nr, Telescope matching |
+| yellow | `#ffcb6e` | types, warnings |
 | coral | `#f77669` | errors, deleted |
-| yellow | `#ffcb6e` | warnings, operators |
+| purple | `#b750ae` | Telescope frame |
 
 Pairs with the same palette across tmux, Ghostty, kitty, WezTerm, starship and
 Übersicht — see [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
