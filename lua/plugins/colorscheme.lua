@@ -36,20 +36,27 @@ return {
         c.border = "#017c9d"
         c.fg = "#b8c7cc"
         -- Box UK accents. Highlight groups read the *500 variants, so set
-        -- both the base key and its 500 twin.
-        c.blue, c.blue500 = "#017c9d", "#017c9d"
-        c.cyan, c.cyan500 = "#15b8ae", "#15b8ae"
-        c.green, c.green500 = "#019d76", "#019d76"
-        c.yellow, c.yellow500 = "#ffcb6e", "#ffcb6e"
-        c.orange, c.orange500 = "#f77669", "#f77669"
-        c.red, c.red500 = "#f77669", "#f77669"
+        -- both the base key and its 500 twin. Anchor tones (#161e22 ground,
+        -- #15b8ae teal, #019d76 green, #f77669 coral) match the terminal
+        -- stack; the rest are supporting tones tuned for role separation.
+        c.blue, c.blue500 = "#2ba3c9", "#2ba3c9" -- functions: brighter azure, no longer teal-adjacent
+        c.cyan, c.cyan500 = "#15b8ae", "#15b8ae" -- strings
+        c.green, c.green500 = "#019d76", "#019d76" -- keywords
+        c.yellow, c.yellow500 = "#ffcb6e", "#ffcb6e" -- types, warnings
+        c.orange, c.orange500 = "#ffa066", "#ffa066" -- numbers/constants: apricot, split from coral
+        c.red, c.red500 = "#f77669", "#f77669" -- errors
         c.magenta, c.magenta500 = "#b750ae", "#b750ae"
-        c.violet, c.violet500 = "#b750ae", "#b750ae"
+        c.violet, c.violet500 = "#9d7bd8", "#9d7bd8" -- todo/special: soft violet, split from magenta
       end,
       on_highlights = function(hl, c)
         hl.CursorLineNr = { fg = c.cyan500, bold = true }
         hl.TelescopeBorder = { fg = c.magenta500 }
         hl.TelescopeMatching = { fg = c.cyan500, bold = true }
+        -- pull literals out of the teal band so strings stand alone
+        hl["@number"] = { fg = c.orange500 }
+        hl["@boolean"] = { fg = c.orange500 }
+        hl["@constant"] = { fg = c.orange500 }
+        hl["@constant.builtin"] = { fg = c.orange500 }
       end,
     },
     config = function(_, opts)

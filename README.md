@@ -186,12 +186,14 @@ the terminal supplies the matching `#161e22` ground.
 | Token | Hex | Where |
 |-------|-----|-------|
 | blue-grey | `#161e22` | terminal ground behind the transparent bg |
-| cyan | `#017c9d` | functions, properties, borders |
+| azure | `#2ba3c9` | functions, properties |
 | green | `#019d76` | keywords |
-| teal | `#15b8ae` | strings, numbers, cursor line nr, Telescope matching |
+| teal | `#15b8ae` | strings, cursor line nr, Telescope matching |
+| apricot | `#ffa066` | numbers, booleans, constants |
 | yellow | `#ffcb6e` | types, warnings |
 | coral | `#f77669` | errors, deleted |
 | purple | `#b750ae` | Telescope frame |
+| violet | `#9d7bd8` | todo, special |
 
 Pairs with the same palette across tmux, Ghostty, kitty, WezTerm, starship and
 Übersicht — see [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
