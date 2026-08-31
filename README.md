@@ -1,8 +1,26 @@
 # 🐱 NyanVim
 
+<div align="center">
+
+[![Neovim](https://img.shields.io/badge/Neovim-%E2%89%A5%200.11-15b8ae?style=flat-square&logo=neovim&logoColor=white)](https://neovim.io)
+[![Lua](https://img.shields.io/badge/Made%20with-Lua-017c9d?style=flat-square&logo=lua&logoColor=white)](https://www.lua.org)
+[![Startup](https://img.shields.io/badge/%E2%9A%A1%20startup-~177ms-ffcb6e?style=flat-square)](docs/perf/)
+[![License](https://img.shields.io/badge/license-Apache--2.0-b750ae?style=flat-square)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/kyuna0312/NyanVim?style=flat-square&color=f77669)](https://github.com/kyuna0312/NyanVim/stargazers)
+
+</div>
+
 A hand-rolled Neovim config — IDE features, fast startup, VSCode-like feel.
 Organized [craftzdog](https://github.com/craftzdog/dotfiles-public)-style: a thin
 [lazy.nvim](https://github.com/folke/lazy.nvim) loader and one plugin per file.
+
+```console
+$ nvim
+[lazy.nvim ]  39 plugins · 177ms
+[mason     ]  41 language servers armed
+[treesitter]  79 parsers compiled
+[nyanvim   ]  ready.  > ^ <
+```
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/kyuna0312/dotfiles/master/assets/logo.png" alt="NyanVim Logo">
