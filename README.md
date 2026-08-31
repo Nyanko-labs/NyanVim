@@ -1,6 +1,8 @@
 # 🐱 NyanVim
 
-A hand-rolled Neovim config — IDE features, fast startup, VSCode-like
+A hand-rolled Neovim config — IDE features, fast startup, VSCode-like feel.
+Organized [craftzdog](https://github.com/craftzdog/dotfiles-public)-style: a thin
+[lazy.nvim](https://github.com/folke/lazy.nvim) loader and one plugin per file.
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/kyuna0312/dotfiles/master/assets/logo.png" alt="NyanVim Logo">
