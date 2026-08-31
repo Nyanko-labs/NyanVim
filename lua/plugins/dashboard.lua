@@ -117,7 +117,26 @@ return {
       footer = function()
         local stats = require("lazy").stats()
         local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-        return { " NyanVim  ⚡ " .. stats.loaded .. "/" .. stats.count .. " plugins  " .. ms .. "ms" }
+        local data = vim.fn.stdpath("data")
+        local mason = #vim.fn.globpath(data .. "/mason/bin", "*", false, true)
+        local parsers = #vim.fn.globpath(data .. "/site/parser", "*.so", false, true)
+        local lines = {
+          "",
+          "[lazy.nvim ]  " .. stats.loaded .. "/" .. stats.count .. " plugins · " .. ms .. "ms",
+          "[mason     ]  " .. mason .. " tools armed",
+          "[treesitter]  " .. parsers .. " parsers compiled",
+          "[nyanvim   ]  ready.  > ^ <",
+        }
+        -- the doom theme centers each line separately; right-pad to equal
+        -- width so the bracket columns stay aligned
+        local width = 0
+        for _, l in ipairs(lines) do
+          width = math.max(width, #l)
+        end
+        for i, l in ipairs(lines) do
+          lines[i] = l .. string.rep(" ", width - #l)
+        end
+        return lines
       end,
     },
   },

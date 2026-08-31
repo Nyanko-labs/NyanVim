@@ -17,7 +17,7 @@ Organized [craftzdog](https://github.com/craftzdog/dotfiles-public)-style: a thi
 ```console
 $ nvim
 [lazy.nvim ]  39 plugins · 177ms
-[mason     ]  41 language servers armed
+[mason     ]  69 tools armed
 [treesitter]  79 parsers compiled
 [nyanvim   ]  ready.  > ^ <
 ```
