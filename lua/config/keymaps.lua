@@ -141,3 +141,14 @@ map("n", "<C-S-e>", "<cmd>NvimTreeFocus<cr>", { desc = "Focus Explorer" })
 -- Terminal
 map("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
 map("t", "<C-\\>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- opencode
+map({ "n", "x" }, "<leader>oa", function()
+  require("opencode").ask("@this: ")
+end, { desc = "Ask opencode" })
+map({ "n", "x" }, "<leader>oo", function()
+  require("opencode").select()
+end, { desc = "opencode menu" })
+
+-- Local LLM (ollama via gen.nvim)
+map({ "n", "v" }, "<leader>ag", "<cmd>Gen<cr>", { desc = "Local LLM (ollama)" })

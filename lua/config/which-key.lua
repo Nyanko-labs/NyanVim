@@ -19,8 +19,9 @@ wk.setup({
 })
 
 wk.add({
-  { "<leader>a", group = "AI/Claude" },
+  { "<leader>a", group = "AI" },
   { "<leader>b", group = "Buffer" },
+  { "<leader>o", group = "opencode" },
   { "<leader>c", group = "Code" },
   { "<leader>f", group = "File" },
   { "<leader>g", group = "Git" },

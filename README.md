@@ -45,6 +45,8 @@ $ nvim
 ## Features
 
 - **Claude in the editor** — [`coder/claudecode.nvim`](https://github.com/coder/claudecode.nvim): run the Claude Code CLI in a split, send selections/buffers, apply diffs. No API key.
+- **opencode** — [`NickvanDyke/opencode.nvim`](https://github.com/NickvanDyke/opencode.nvim): drive the opencode CLI without leaving the editor.
+- **Local LLM** — [`David-Kunz/gen.nvim`](https://github.com/David-Kunz/gen.nvim) + [Ollama](https://ollama.com) (`qwen2.5-coder:7b`): offline code chat, no API, no cloud.
 - **LSP** — mason + nvim-lspconfig on the modern `vim.lsp.config` API (Neovim 0.11+). 7 servers pre-installed; anything added via `:MasonInstall` is auto-enabled (mason-lspconfig v2). Inline diagnostics on.
 - **Single-owner keymaps** — every global map lives in `config/keymaps.lua`; which-key only labels the groups.
 - **Completion** — nvim-cmp + LuaSnip + lspkind.
@@ -70,6 +72,8 @@ $ nvim
 | tree-sitter CLI | any | `tree-sitter` — compiles Treesitter parsers (`:TSUpdate`). `cargo install tree-sitter-cli` / `npm i -g tree-sitter-cli` / release binary |
 | Nerd Font | any | [nerdfonts.com](https://www.nerdfonts.com/) |
 | Claude Code CLI | any | optional — for in-editor Claude (`claude` on PATH) |
+| opencode CLI | any | optional — for `<Space>o*` maps (`opencode` on PATH) |
+| Ollama | any | optional — for local LLM (`brew install ollama` + `ollama pull qwen2.5-coder:7b`) |
 
 > **Note:** Distro packages are often too old (e.g. Ubuntu ships 0.9.x). Use the
 > official AppImage or a recent build to get **0.11+**.
@@ -134,6 +138,9 @@ Leader key: **`<Space>`**
 | `<Space>aa` / `<Space>ad` | Accept / Deny diff |
 | `<Space>ar` / `<Space>aC` | Resume / Continue session |
 | `<Space>am` | Select model |
+| `<Space>ag` | Local LLM prompt (ollama) |
+| `<Space>oa` | Ask opencode |
+| `<Space>oo` | opencode menu |
 
 ### Git & Tools
 | Key | Action |
