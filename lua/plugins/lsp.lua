@@ -15,6 +15,9 @@ return {
     },
     config = function()
       require("mason").setup()
+      -- mason-lspconfig v2: automatic_enable (default on) runs
+      -- vim.lsp.enable() for every mason-installed server, so no manual
+      -- server list is needed.
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
@@ -25,20 +28,17 @@ return {
           "html",
           "cssls",
         },
-        automatic_installation = true,
       })
 
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-      -- Enhanced LSP configuration (nvim 0.11+ API)
-      local servers = {
-        'lua_ls', 'pyright', 'ts_ls', 'rust_analyzer',
-        'jsonls', 'html', 'cssls'
-      }
+      -- Inline diagnostics are off by default since nvim 0.11 — turn them on.
+      vim.diagnostic.config({
+        virtual_text = true,
+        severity_sort = true,
+      })
 
       -- Shared capabilities for every server
       vim.lsp.config('*', {
-        capabilities = capabilities,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
       })
 
       -- Server-specific settings
@@ -51,8 +51,6 @@ return {
           },
         },
       })
-
-      vim.lsp.enable(servers)
 
       -- Advanced completion setup
       local cmp = require('cmp')

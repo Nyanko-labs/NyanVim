@@ -8,6 +8,7 @@ local required_executables = {
   { name = "rg",       reason = "Telescope live grep" },
   { name = "fd",       reason = "Telescope file search" },
   { name = "lazygit",  reason = "LazyGit integration (optional)", optional = true },
+  { name = "tree-sitter", reason = "Treesitter parser installs (nvim-treesitter main branch)" },
 }
 
 local function check_nvim_version()

@@ -7,6 +7,15 @@ return {
         sort_by = "case_sensitive",
         view = { side = "right", width = 35 },
         filters = { dotfiles = true },
+        -- Buffer-local extras on top of the defaults; these used to be
+        -- global maps in keymaps.lua, which made <Del> dangerous elsewhere.
+        on_attach = function(bufnr)
+          local api = require("nvim-tree.api")
+          api.config.mappings.default_on_attach(bufnr)
+          local opts = { buffer = bufnr, silent = true }
+          vim.keymap.set("n", "<F2>", api.fs.rename, opts)
+          vim.keymap.set("n", "<Del>", api.fs.remove, opts)
+        end,
       })
     end,
   },

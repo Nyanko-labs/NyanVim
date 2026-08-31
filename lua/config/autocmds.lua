@@ -58,25 +58,8 @@ autocmd("CursorHold", {
   end,
 })
 
-local function set_transparent_bg()
-  -- nvim_set_hl replaces the whole group; merge so fg survives the bg clear
-  for _, group in ipairs({ "Normal", "NormalFloat", "NormalNC", "SignColumn", "EndOfBuffer" }) do
-    local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
-    hl.bg = nil
-    hl.ctermbg = nil
-    vim.api.nvim_set_hl(0, group, hl)
-  end
-end
-
-local transparent_group = augroup("TransparentBackground", { clear = true })
-
-autocmd("ColorScheme", {
-  pattern = "*",
-  callback = set_transparent_bg,
-  group = transparent_group,
-})
-
-set_transparent_bg()
+-- Transparency lives in the colorscheme config (plugins/colorscheme.lua),
+-- not here: the theme's transparent option replaces the old bg-clearing hack.
 
 local treesitter_group = augroup("TreesitterWindow", { clear = true })
 

@@ -81,7 +81,8 @@ opt.wildoptions = "pum"
 
 -- Folding (treesitter-based, disabled by default)
 opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- nvim-treesitter main branch dropped the old vimscript foldexpr
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldenable = false
 opt.foldlevel = 99
 
