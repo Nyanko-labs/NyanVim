@@ -2,11 +2,11 @@
 
 <div align="center">
 
-[![Neovim](https://img.shields.io/badge/Neovim-%E2%89%A5%200.11-15b8ae?style=flat-square&logo=neovim&logoColor=white)](https://neovim.io)
-[![Lua](https://img.shields.io/badge/Made%20with-Lua-017c9d?style=flat-square&logo=lua&logoColor=white)](https://www.lua.org)
-[![Startup](https://img.shields.io/badge/%E2%9A%A1%20startup-~177ms-ffcb6e?style=flat-square)](docs/perf/)
-[![License](https://img.shields.io/badge/license-Apache--2.0-b750ae?style=flat-square)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/kyuna0312/NyanVim?style=flat-square&color=f77669)](https://github.com/kyuna0312/NyanVim/stargazers)
+[![Neovim](https://img.shields.io/badge/Neovim-%E2%89%A5%200.11-0cc7c2?style=flat-square&logo=neovim&logoColor=white)](https://neovim.io)
+[![Lua](https://img.shields.io/badge/Made%20with-Lua-2bbcd5?style=flat-square&logo=lua&logoColor=white)](https://www.lua.org)
+[![Startup](https://img.shields.io/badge/%E2%9A%A1%20startup-~177ms-f2c74b?style=flat-square)](docs/perf/)
+[![License](https://img.shields.io/badge/license-Apache--2.0-be59d6?style=flat-square)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/kyuna0312/NyanVim?style=flat-square&color=f37c4b)](https://github.com/kyuna0312/NyanVim/stargazers)
 
 </div>
 
@@ -56,7 +56,7 @@ $ nvim
 - **Git** — gitsigns, diffview, lazygit.
 - **Editor** — toggleterm, autopairs, Comment.nvim, todo-comments, project.nvim.
 - **Keymap discovery** — which-key (v3).
-- **Theme** — **BOX UK Contrast**: the [solarized-osaka](https://github.com/craftzdog/solarized-osaka.nvim) engine with its palette overridden to the Box UK set (ported from the [vonqo](https://github.com/vonqo/vonqo) IntelliJ theme), a calm deep blue-grey + teal palette shared across the whole stack.
+- **Theme** — **Night City Mix** via [nightcity.nvim](https://github.com/kyuna0312/nightcity.nvim): the gamma-correct blend of Box UK Contrast, Solarized Osaka and Cyberpunk Lucy — calm blue-grey grounds with a neon pop, shared across the whole stack.
 - **Discipline** — habit-trainer that nags on `hjkl`/arrow spamming.
 
 ## Requirements
@@ -174,26 +174,27 @@ lua/
     init.lua · health.lua · discipline.lua
 ```
 
-## Theme — BOX UK Contrast
+## Theme — Night City Mix
 
-The colorscheme is the [solarized-osaka](https://github.com/craftzdog/solarized-osaka.nvim)
-engine with its palette overridden to **Box UK Contrast** in
-`lua/plugins/colorscheme.lua` (`on_colors`) — a calm deep blue-grey + teal set:
+The colorscheme is [nightcity.nvim](https://github.com/kyuna0312/nightcity.nvim)
+(style `mix`, set in `lua/plugins/colorscheme.lua`) — the blend palette of
+[night-city-palettes](https://github.com/kyuna0312/night-city-palettes); other
+styles: `boxuk`, `lucy`, `osaka`.
 
 The background is transparent (owned by the colorscheme, not an autocmd) —
-the terminal supplies the matching `#161e22` ground.
+the terminal supplies the matching `#101a1f` ground.
 
 | Token | Hex | Where |
 |-------|-----|-------|
-| blue-grey | `#161e22` | terminal ground behind the transparent bg |
+| blue-grey | `#101a1f` | terminal ground behind the transparent bg |
 | azure | `#2ba3c9` | functions, properties |
-| green | `#019d76` | keywords |
-| teal | `#15b8ae` | strings, cursor line nr, Telescope matching |
+| green | `#49d575` | keywords |
+| teal | `#0cc7c2` | strings, cursor line nr, Telescope matching |
 | apricot | `#ffa066` | numbers, booleans, constants |
-| yellow | `#ffcb6e` | types, warnings |
-| coral | `#f77669` | errors, deleted |
-| purple | `#b750ae` | Telescope frame |
-| violet | `#9d7bd8` | todo, special |
+| yellow | `#f2c74b` | types, warnings |
+| red | `#f65162` | errors, deleted |
+| purple | `#be59d6` | special |
+| violet | `#9d7bd8` | todo, hints |
 
 Pairs with the same palette across tmux, Ghostty, kitty, WezTerm, starship and
 Übersicht — see [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
