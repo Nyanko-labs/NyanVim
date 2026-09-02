@@ -31,8 +31,15 @@ autocmd("BufReadPost", {
 autocmd("FileType", {
   group = general,
   pattern = {
-    "qf", "help", "man", "notify", "lspinfo", "spectre_panel",
-    "startuptime", "tsplayground", "PlenaryTestPopup",
+    "qf",
+    "help",
+    "man",
+    "notify",
+    "lspinfo",
+    "spectre_panel",
+    "startuptime",
+    "tsplayground",
+    "PlenaryTestPopup",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -43,7 +50,9 @@ autocmd("FileType", {
 autocmd("BufWritePre", {
   group = general,
   callback = function(event)
-    if event.match:match("^%w%w+://") then return end
+    if event.match:match("^%w%w+://") then
+      return
+    end
     local file = vim.loop.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
@@ -54,7 +63,7 @@ local lsp = augroup("LSP", { clear = true })
 autocmd("CursorHold", {
   group = lsp,
   callback = function()
-    vim.diagnostic.open_float(nil, { focus = false })
+    vim.diagnostic.open_float(nil, { focus = false, border = "rounded" })
   end,
 })
 
@@ -99,13 +108,12 @@ end, {})
 autocmd("BufEnter", {
   group = augroup("NvimTreePyCharmBehavior", { clear = true }),
   callback = function()
-    local api = require('nvim-tree.api')
-    local view = require('nvim-tree.view')
+    -- nvim-tree is lazy: only require it for a directory arg or when it is
+    -- already open, so plain file edits don't load it.
     if vim.fn.isdirectory(vim.fn.expand("%:p")) == 1 then
-      api.tree.open()
-    end
-    if view.is_visible() then
-      api.tree.find_file({ open = true, focus = false })
+      require("nvim-tree.api").tree.open()
+    elseif package.loaded["nvim-tree"] and require("nvim-tree.api").tree.is_visible() then
+      require("nvim-tree.api").tree.find_file({ open = true, focus = false })
     end
   end,
 })
@@ -113,9 +121,8 @@ autocmd("BufEnter", {
 autocmd("FileType", {
   pattern = "dashboard",
   callback = function()
-    local view = require("nvim-tree.view")
-    if view.is_visible() then
-      view.close()
+    if package.loaded["nvim-tree"] then
+      require("nvim-tree.api").tree.close()
     end
     vim.opt_local.modifiable = false
     vim.opt_local.bufhidden = "wipe"

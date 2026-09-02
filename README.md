@@ -4,19 +4,21 @@
 
 [![Neovim](https://img.shields.io/badge/Neovim-%E2%89%A5%200.11-0cc7c2?style=flat-square&logo=neovim&logoColor=white)](https://neovim.io)
 [![Lua](https://img.shields.io/badge/Made%20with-Lua-2bbcd5?style=flat-square&logo=lua&logoColor=white)](https://www.lua.org)
-[![Startup](https://img.shields.io/badge/%E2%9A%A1%20startup-~177ms-f2c74b?style=flat-square)](docs/perf/)
+[![Startup](https://img.shields.io/badge/%E2%9A%A1%20startup-~30ms-f2c74b?style=flat-square)](bench.sh)
 [![License](https://img.shields.io/badge/license-Apache--2.0-be59d6?style=flat-square)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/kyuna0312/NyanVim?style=flat-square&color=f37c4b)](https://github.com/kyuna0312/NyanVim/stargazers)
 
 </div>
 
-A hand-rolled Neovim config — IDE features, fast startup, VSCode-like feel.
+A hand-rolled Neovim config — IDE features, NvChad-class startup, VSCode-like feel.
 Organized [craftzdog](https://github.com/craftzdog/dotfiles-public)-style: a thin
 [lazy.nvim](https://github.com/folke/lazy.nvim) loader and one plugin per file.
+Every plugin is lazy-loaded on an event, command or key; the dashboard comes
+up in ~30ms and a file opens in ~100ms with LSP attached.
 
 ```console
 $ nvim
-[lazy.nvim ]  39 plugins · 177ms
+[lazy.nvim ]  6/41 plugins · 28ms
 [mason     ]  69 tools armed
 [treesitter]  79 parsers compiled
 [nyanvim   ]  ready.  > ^ <
@@ -44,6 +46,9 @@ $ nvim
 
 ## Features
 
+- **Lazy everything** — plugins load on `event`/`cmd`/`keys`; only the colorscheme, snacks, treesitter and the dashboard are eager. `:Lazy profile` shows the breakdown.
+- **Theme switcher** — `<Space>th` opens a Telescope picker over the four nightcity styles with live preview (NvChad-style); the pick is remembered across restarts.
+- **Cheatsheet** — `<Space>fk` fuzzy-searches every keymap with its description; `<Space>` + wait shows the groups (which-key).
 - **Claude in the editor** — [`coder/claudecode.nvim`](https://github.com/coder/claudecode.nvim): run the Claude Code CLI in a split, send selections/buffers, apply diffs. No API key.
 - **opencode** — [`NickvanDyke/opencode.nvim`](https://github.com/NickvanDyke/opencode.nvim): drive the opencode CLI without leaving the editor.
 - **Local LLM** — [`David-Kunz/gen.nvim`](https://github.com/David-Kunz/gen.nvim) + [Ollama](https://ollama.com) (`qwen2.5-coder:7b`): offline code chat, no API, no cloud.
@@ -52,7 +57,8 @@ $ nvim
 - **Completion** — nvim-cmp + LuaSnip + lspkind.
 - **Fuzzy finding** — Telescope (fzf-native, ui-select, projects, neoclip).
 - **Syntax** — Treesitter (highlight + indent).
-- **UI** — NyanVim dashboard, lualine, bufferline, nvim-tree, indent guides, illuminate.
+- **UI** — NyanVim dashboard, lualine, bufferline, nvim-tree, illuminate, inline colour swatches (colorizer); [snacks.nvim](https://github.com/folke/snacks.nvim) supplies the notification popups, indent guides and floating `vim.ui.input`.
+- **Formatting** — conform.nvim: stylua · black · prettier on save, LSP fallback when a formatter is missing (`<Space>cf`).
 - **Git** — gitsigns, diffview, lazygit.
 - **Editor** — toggleterm, autopairs, Comment.nvim, todo-comments, project.nvim.
 - **Keymap discovery** — which-key (v3).
@@ -110,6 +116,7 @@ Leader key: **`<Space>`**
 | `<Space>fg` | Live grep |
 | `<Space>fb` | Open buffers |
 | `<Space>fh` | Help tags |
+| `<Space>fk` | Keymaps cheatsheet |
 | `<C-b>` | Toggle file explorer (nvim-tree) |
 | `<Space>e` | Toggle file explorer |
 | `<S-h>` / `<S-l>` | Prev / Next buffer |
@@ -149,7 +156,8 @@ Leader key: **`<Space>`**
 | `<Space>gd` | Diffview |
 | `<Space>gs` / `gb` / `gc` | Git status / branches / commits |
 | `<Space>pp` | Switch project |
-| `<Space>t` | Toggle terminal |
+| `<Space>th` | Theme picker (live preview) |
+| `<Space>tt` | Toggle terminal |
 | `<C-\>` | Toggle floating terminal |
 | `<Space>cm` / `:Mason` | LSP/tool installer |
 | `:Dashboard` | NyanVim dashboard |
@@ -168,18 +176,19 @@ lua/
     autocmds.lua         -- autocommands
     which-key.lua        -- <leader> group labels only
   plugins/               -- one concern per file, all auto-imported
-    colorscheme · ui · dashboard · telescope · lsp
-    treesitter · editor · which-key · claudecode
+    colorscheme · ui · dashboard · telescope · lsp · conform
+    treesitter · editor · which-key · claudecode · ai
   nyanvim/
-    init.lua · health.lua · discipline.lua
+    init.lua · health.lua · discipline.lua · theme.lua
 ```
 
 ## Theme — Night City Mix
 
 The colorscheme is [nightcity.nvim](https://github.com/kyuna0312/nightcity.nvim)
-(style `mix`, set in `lua/plugins/colorscheme.lua`) — the blend palette of
-[night-city-palettes](https://github.com/kyuna0312/night-city-palettes); other
-styles: `boxuk`, `lucy`, `osaka`.
+(default style `mix`, set in `lua/plugins/colorscheme.lua`) — the blend palette of
+[night-city-palettes](https://github.com/kyuna0312/night-city-palettes). Press
+`<Space>th` to preview and switch between `mix`, `boxuk`, `lucy` and `osaka`;
+the choice is saved to `~/.local/share/nvim/nyanvim-theme`.
 
 The background is transparent (owned by the colorscheme, not an autocmd) —
 the terminal supplies the matching `#101a1f` ground.
@@ -235,7 +244,14 @@ Vim, and more.
 
 Startup time is benchmarked on every release using `nvim --startuptime`.
 
-Results live in [`docs/perf/`](docs/perf/) — one file per release, with mean/median/min/max and a comparison against the previous release.
+Results are committed to `docs/perf/` by CI — one file per release, with mean/median/min/max and a comparison against the previous release.
+
+Typical numbers on an M-series Mac (`nvim --startuptime`, 5-run median):
+
+| Scenario | Before lazy-loading | Now |
+|----------|--------------------|-----|
+| dashboard (`nvim`) | ~215ms | ~28ms |
+| open a Lua file, LSP attached | ~190ms | ~100ms |
 
 **Run locally:**
 ```bash

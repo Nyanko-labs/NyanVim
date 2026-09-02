@@ -16,7 +16,19 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
-  defaults = { lazy = false }, -- preserve prior eager-load behavior
+  -- Plugins declare their own event/cmd/keys; anything without one loads eagerly.
   checker = { enabled = false },
   change_detection = { notify = false },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+        "netrwPlugin",
+      },
+    },
+  },
 })

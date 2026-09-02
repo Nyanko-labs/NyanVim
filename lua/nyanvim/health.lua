@@ -13,11 +13,11 @@ local required_executables = {
 
 local function check_nvim_version()
   health.start("Neovim Version")
-  if nyanvim.nvim_version_ok(0, 9) then
-    health.ok(string.format("Neovim %s (>= 0.9 required)", tostring(vim.version())))
+  if nyanvim.nvim_version_ok(0, 11) then
+    health.ok(string.format("Neovim %s (>= 0.11 required)", tostring(vim.version())))
   else
     health.error(
-      string.format("Neovim %s is too old. Upgrade to >= 0.9", tostring(vim.version())),
+      string.format("Neovim %s is too old. Upgrade to >= 0.11", tostring(vim.version())),
       { "https://github.com/neovim/neovim/releases" }
     )
   end

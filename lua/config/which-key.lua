@@ -27,4 +27,5 @@ wk.add({
   { "<leader>g", group = "Git" },
   { "<leader>p", group = "Project" },
   { "<leader>s", group = "Search" },
+  { "<leader>t", group = "Toggle/Theme" },
 })

@@ -2,7 +2,7 @@ return {
   -- Active theme: nightcity.nvim (kyuna0312/night-city-palettes as a native
   -- colorscheme). Style "mix" = Night City Mix, the gamma-correct blend of
   -- Box UK × Solarized Osaka × Lucy: bg #101a1f, cyan #2bbcd5, teal #0cc7c2.
-  -- Other styles: "boxuk" | "lucy" | "osaka".
+  -- Other styles: "boxuk" | "lucy" | "osaka" — switch live with <leader>th.
   {
     "kyuna0312/nightcity.nvim",
     lazy = false,
@@ -16,7 +16,7 @@ return {
     },
     config = function(_, opts)
       require("nightcity").setup(opts)
-      vim.cmd.colorscheme("nightcity")
+      vim.cmd.colorscheme("nightcity-" .. (require("nyanvim.theme").saved() or opts.style))
     end,
   },
 }

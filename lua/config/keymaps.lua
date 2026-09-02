@@ -49,14 +49,18 @@ map("n", "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", { desc = "Close buffers t
 -- LSP
 map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-map("n", "K", vim.lsp.buf.hover, { desc = "Show hover" })
+map("n", "K", function()
+  vim.lsp.buf.hover({ border = "rounded" })
+end, { desc = "Show hover" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
 map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
 map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 -- Code
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
-map("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format code" })
+map({ "n", "v" }, "<leader>cf", function()
+  require("conform").format({ lsp_format = "fallback" })
+end, { desc = "Format code" })
 map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" })
 map("n", "<leader>ci", "<cmd>MasonInstall<cr>", { desc = "Mason Install" })
 map("n", "<leader>cu", "<cmd>MasonUninstall<cr>", { desc = "Mason Uninstall" })
@@ -85,6 +89,7 @@ map("n", "<leader>fb", function()
 end, { desc = "Find buffers" })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
+map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps (cheatsheet)" })
 map("n", "<leader>fy", "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", { desc = "Yank history" })
 
 -- Search
@@ -124,8 +129,7 @@ map("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 -- Explorer (nvim-tree)
 map("n", "<leader>e", function()
   local api = require("nvim-tree.api")
-  local view = require("nvim-tree.view")
-  if not view.is_visible() then
+  if not api.tree.is_visible() then
     api.tree.open()
     vim.cmd("wincmd L")
     vim.cmd("vertical resize 35")
@@ -138,8 +142,11 @@ map("n", "<C-b>", function()
 end, { desc = "Toggle Explorer" })
 map("n", "<C-S-e>", "<cmd>NvimTreeFocus<cr>", { desc = "Focus Explorer" })
 
--- Terminal
-map("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
+-- Toggle / Theme
+map("n", "<leader>tt", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
+map("n", "<leader>th", function()
+  require("nyanvim.theme").pick()
+end, { desc = "Theme picker" })
 map("t", "<C-\\>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- opencode

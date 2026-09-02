@@ -78,6 +78,15 @@ return {
           action = "e ~/.config/nvim/lua/plugins/",
         },
         {
+          icon = " ",
+          icon_hl = "Title",
+          desc = "Theme",
+          desc_hl = "String",
+          key = "t",
+          key_hl = "Number",
+          action = "lua require('nyanvim.theme').pick()",
+        },
+        {
           icon = "󰏗 ",
           icon_hl = "Title",
           desc = "Health Check",
