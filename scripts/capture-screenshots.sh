@@ -1,24 +1,16 @@
 #!/usr/bin/env bash
-# capture-screenshots.sh — take NyanVim screenshots for README
-# Requirements: grim (sudo pacman -S grim), wezterm
+# capture-screenshots.sh — take NyanVim screenshots for README (macOS)
+# Requirements: wezterm, screencapture (built in), swift (Xcode CLT) for the window id
+# Uses scripts/capture-wezterm.lua so the window is opaque, tab-less and full-screen.
 set -euo pipefail
 
 REPO=$(git rev-parse --show-toplevel)
 OUT="${REPO}/assets/screenshots"
 mkdir -p "$OUT"
+command -v wezterm >/dev/null || { echo "error: wezterm not found" >&2; exit 1; }
 
-if ! command -v grim &>/dev/null; then
-  echo "error: grim not found. Install: sudo pacman -S grim" >&2
-  exit 1
-fi
-
-if ! command -v wezterm &>/dev/null; then
-  echo "error: wezterm not found" >&2
-  exit 1
-fi
-
-# Create a sample Lua file for LSP demo
-DEMO_FILE=$(mktemp --suffix=.lua)
+# Sample Lua file for the LSP demo
+DEMO_FILE=$(mktemp -t nyanvim-demo).lua
 cat > "$DEMO_FILE" << 'LUA'
 -- NyanVim LSP demo
 local M = {}
@@ -30,8 +22,7 @@ function M.greet(name)
 end
 
 local function setup()
-  local lsp = require("lspconfig")
-  lsp.lua_ls.setup({
+  vim.lsp.config("lua_ls", {
     settings = {
       Lua = { diagnostics = { globals = { "vim" } } },
     },
@@ -48,55 +39,77 @@ cleanup() {
 }
 trap cleanup EXIT
 
-send() {
-  wezterm cli send-text --pane-id "$PANE" -- "$1"
+send() { wezterm cli send-text --no-paste --pane-id "$PANE" -- "$1"; }
+
+# CoreGraphics id of the biggest WezTerm window (the full-screen one lives on
+# its own Space, so it is not "on screen" from the shell's point of view)
+window_id() {
+  swift - <<'SWIFT'
+import CoreGraphics
+let list = CGWindowListCopyWindowInfo([.optionAll], kCGNullWindowID) as! [[String: Any]]
+var best: (Int, Double) = (0, 0)
+for w in list where ((w["kCGWindowOwnerName"] as? String) ?? "").lowercased().contains("wezterm") {
+  let b = w["kCGWindowBounds"] as! [String: Double]
+  let area = b["Width"]! * b["Height"]!
+  if area > best.1 { best = (w["kCGWindowNumber"] as! Int, area) }
+}
+if best.0 != 0 { print(best.0) }
+SWIFT
 }
 
 shot() {
-  local name="$1"
   sleep 2
-  grim "${OUT}/${name}.png"
-  echo "  saved: ${name}.png"
+  screencapture -x -o -l "$WIN" "${OUT}/$1.png"
+  echo "  saved: $1.png"
 }
 
 echo "Spawning NyanVim..."
-PANE=$(wezterm cli spawn --new-window -- nvim)
-sleep 6  # wait for dashboard + plugins
+# scripts/capture-wezterm.lua = the user's config + opaque + no tab bar + fullscreen
+wezterm --config-file "${REPO}/scripts/capture-wezterm.lua" \
+  start --always-new-process --cwd "$REPO" -- nvim >/dev/null 2>&1 &
+sleep 7
+# talk to the GUI we just started, not a stale socket from another session
+export WEZTERM_UNIX_SOCKET
+WEZTERM_UNIX_SOCKET=$(ls -t "$HOME/.local/share/wezterm"/gui-sock-* | head -1)
+PANE=$(wezterm cli list --format json | python3 -c 'import json,sys; print(max(json.load(sys.stdin), key=lambda p: p["pane_id"])["pane_id"])')
+WIN=$(window_id)
+[[ -n "$WIN" ]] || { echo "error: WezTerm window not found" >&2; exit 1; }
 
-echo "1/5 Dashboard..."
+echo "1/6 Dashboard..."
 shot "dashboard"
 
-echo "2/5 IDE view with file explorer..."
+echo "2/6 IDE view with file explorer..."
 send ":e ${DEMO_FILE}"$'\r'
-sleep 1
+sleep 2
 send $'\x02'  # <C-b> = toggle nvim-tree
-sleep 1
 shot "ide-view"
 
-echo "3/5 Telescope fuzzy finder..."
-send $'\x1b'  # ESC to normal mode
-sleep 0.3
-send " ff"    # <Space>ff = find files
-sleep 1
+echo "3/6 Telescope fuzzy finder..."
+send $'\x1b'; sleep 0.3
+send " ff"    # <Space>ff
+sleep 0.5
+send "theme"  # narrow to lua/nyanvim/theme.lua so the preview shows code
 shot "telescope"
 
-echo "4/5 LSP hover..."
-send $'\x1b'$'\x1b'  # close telescope
-sleep 0.5
-send ":e ${DEMO_FILE}"$'\r'
-sleep 1
-# Position on function name and trigger hover
-send "3G"    # go to line 3
+echo "4/6 LSP hover..."
+send $'\x1b'$'\x1b'; sleep 0.5
+send ":e ${DEMO_FILE}"$'\r'; sleep 1
+send "6G"     # function M.greet
 sleep 0.3
-send "K"     # hover
-sleep 1
+send "K"
 shot "lsp"
 
-echo "5/5 Floating terminal..."
-send $'\x1b'
-sleep 0.3
-send " t"    # <Space>t = toggle terminal
-sleep 1
+echo "5/6 Theme picker..."
+send $'\x1b'; sleep 0.3
+send " th"    # <Space>th
+sleep 0.5
+send $'\x1b'; sleep 0.3   # picker to normal mode
+send "j"      # preview the second style
+shot "theme"
+
+echo "6/6 Floating terminal..."
+send $'\x1b'$'\x1b'; sleep 0.5
+send " tt"    # <Space>tt
 shot "terminal"
 
 echo ""

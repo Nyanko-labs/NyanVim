@@ -4,7 +4,7 @@
 
 [![Neovim](https://img.shields.io/badge/Neovim-%E2%89%A5%200.11-0cc7c2?style=flat-square&logo=neovim&logoColor=white)](https://neovim.io)
 [![Lua](https://img.shields.io/badge/Made%20with-Lua-2bbcd5?style=flat-square&logo=lua&logoColor=white)](https://www.lua.org)
-[![Startup](https://img.shields.io/badge/%E2%9A%A1%20startup-~30ms-f2c74b?style=flat-square)](bench.sh)
+[![Startup](https://img.shields.io/badge/%E2%9A%A1%20startup-~40ms-f2c74b?style=flat-square)](bench.sh)
 [![License](https://img.shields.io/badge/license-Apache--2.0-be59d6?style=flat-square)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/kyuna0312/NyanVim?style=flat-square&color=f37c4b)](https://github.com/kyuna0312/NyanVim/stargazers)
 
@@ -14,11 +14,11 @@ A hand-rolled Neovim config — IDE features, NvChad-class startup, VSCode-like 
 Organized [craftzdog](https://github.com/craftzdog/dotfiles-public)-style: a thin
 [lazy.nvim](https://github.com/folke/lazy.nvim) loader and one plugin per file.
 Every plugin is lazy-loaded on an event, command or key; the dashboard comes
-up in ~30ms and a file opens in ~100ms with LSP attached.
+up in ~40ms and a file opens in ~100ms with LSP attached.
 
 ```console
 $ nvim
-[lazy.nvim ]  6/41 plugins · 28ms
+[lazy.nvim ]  6/41 plugins · 40ms
 [mason     ]  69 tools armed
 [treesitter]  79 parsers compiled
 [nyanvim   ]  ready.  > ^ <
@@ -40,9 +40,13 @@ $ nvim
 |----------|-------------|
 | ![IDE View](assets/screenshots/ide-view.png) | ![Telescope](assets/screenshots/telescope.png) |
 
-| LSP Hover | Terminal |
-|-----------|----------|
-| ![LSP](assets/screenshots/lsp.png) | ![Terminal](assets/screenshots/terminal.png) |
+| LSP Hover | Theme Picker (`<Space>th`) |
+|-----------|----------------------------|
+| ![LSP](assets/screenshots/lsp.png) | ![Theme picker](assets/screenshots/theme.png) |
+
+| Floating Terminal | |
+|-------------------|-|
+| ![Terminal](assets/screenshots/terminal.png) | |
 
 ## Features
 

@@ -33,7 +33,7 @@ function M.pick()
   local previous, chosen = vim.g.colors_name, nil
 
   pickers
-    .new({}, {
+    .new(require("telescope.themes").get_dropdown({ previewer = false }), {
       prompt_title = "NyanVim theme",
       finder = finders.new_table(M.styles),
       sorter = conf.generic_sorter({}),
