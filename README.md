@@ -4,7 +4,7 @@
 
 [![Neovim](https://img.shields.io/badge/Neovim-%E2%89%A5%200.11-0cc7c2?style=flat-square&logo=neovim&logoColor=white)](https://neovim.io)
 [![Lua](https://img.shields.io/badge/Made%20with-Lua-2bbcd5?style=flat-square&logo=lua&logoColor=white)](https://www.lua.org)
-[![Startup](https://img.shields.io/badge/%E2%9A%A1%20startup-~40ms-f2c74b?style=flat-square)](bench.sh)
+[![Startup](https://img.shields.io/badge/%E2%9A%A1%20startup-~30ms-f2c74b?style=flat-square)](docs/perf/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-be59d6?style=flat-square)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/kyuna0312/NyanVim?style=flat-square&color=f37c4b)](https://github.com/kyuna0312/NyanVim/stargazers)
 
