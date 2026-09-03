@@ -1,0 +1,16 @@
+-- ~/.config/nvim/lua/user/init.lua — your personal NyanVim overrides.
+-- This file is git-ignored: `:NyanUpdate` never touches it.
+-- Open it any time with :NyanConfig (or <Space>nc).
+--
+-- Extra plugins go in lua/user/plugins/*.lua as normal lazy.nvim specs:
+--   return { { "owner/repo", opts = {} } }
+
+-- Options
+-- vim.opt.relativenumber = false
+-- vim.opt.wrap = true
+
+-- Keymaps
+-- vim.keymap.set("n", "<leader>x", "<cmd>echo 'hi'<cr>", { desc = "My map" })
+
+-- Theme: pick with <Space>th; or force one here
+-- vim.cmd.colorscheme("nightcity-lucy")

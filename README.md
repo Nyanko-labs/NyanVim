@@ -10,11 +10,12 @@
 
 </div>
 
-A hand-rolled Neovim config — IDE features, NvChad-class startup, VSCode-like feel.
-Organized [craftzdog](https://github.com/craftzdog/dotfiles-public)-style: a thin
-[lazy.nvim](https://github.com/folke/lazy.nvim) loader and one plugin per file.
-Every plugin is lazy-loaded on an event, command or key; the dashboard comes
-up in ~30ms and a file opens in ~100ms with LSP attached.
+**NyanVim** is a ready-to-use Neovim setup: open it and you have an IDE —
+file tree, fuzzy finder, LSP, completion, Git, terminal, AI helpers — with a
+30ms startup and a theme you can switch live. Made for people who want the
+polish of [NvChad](https://github.com/NvChad/NvChad) /
+[LunarVim](https://github.com/LunarVim/LunarVim) but in a config small enough
+to read in one sitting (~1,200 lines of Lua, one plugin per file).
 
 ```console
 $ nvim
@@ -48,11 +49,109 @@ $ nvim
 |-------------------|-|
 | ![Terminal](assets/screenshots/terminal.png) | |
 
+## Quickstart
+
+**Try it without touching your current config** (installs side-by-side as
+`~/.config/nyanvim`):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/kyuna0312/NyanVim/main/install.sh | bash -s -- --try
+NVIM_APPNAME=nyanvim nvim
+```
+
+Like it? Make it your default (your old `~/.config/nvim` is backed up as
+`nvim.bak.<timestamp>`):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/kyuna0312/NyanVim/main/install.sh | bash
+nvim
+```
+
+Plugins install themselves on the first launch (about a minute). Then run
+`:NyanHealth` — it tells you if anything is missing.
+
+<details>
+<summary>Manual install</summary>
+
+```bash
+mv ~/.config/nvim ~/.config/nvim.bak
+git clone https://github.com/kyuna0312/NyanVim.git ~/.config/nvim
+nvim
+```
+</details>
+
+## Your first 10 keys
+
+The leader key is **Space**. Press it and wait half a second: which-key lists
+every group. These get you through a normal day:
+
+| Key | What it does |
+|-----|--------------|
+| `Space f f` | find a file by name |
+| `Space f g` | search text in the whole project |
+| `Ctrl b` | show / hide the file tree |
+| `Shift h` / `Shift l` | previous / next open file |
+| `g d` · `K` | jump to definition · show docs under the cursor |
+| `Space c a` | code action (fix, import, refactor) |
+| `Space c f` | format the file |
+| `Space g g` | LazyGit (stage, commit, push) |
+| `Ctrl \` | floating terminal |
+| `Space t h` | theme picker (`j`/`k` preview live, Enter keeps) |
+
+Lost? `Space f k` searches every keymap by description.
+
+## The NyanVim menu — `Space n`
+
+Like LunarVim's `Space L` and Doom's `Space h`: everything about the config
+itself lives under one key.
+
+| Key | Command | What it does |
+|-----|---------|--------------|
+| `Space n u` | `:NyanUpdate` | pull the latest NyanVim and sync plugins |
+| `Space n h` | `:NyanHealth` | check Neovim version, tools, compiler |
+| `Space n c` | `:NyanConfig` | open **your** overrides file (created on first use) |
+| `Space n k` | `:Telescope keymaps` | keymap cheatsheet |
+| `Space n l` / `n m` | `:Lazy` / `:Mason` | plugin / LSP-tool managers |
+| `Space n t` | | theme picker |
+
+## Make it yours
+
+You never need to edit NyanVim's own files. Your changes live in
+`lua/user/`, which is git-ignored, so `:NyanUpdate` can't overwrite them:
+
+- `lua/user/init.lua` — options, keymaps, colorscheme (open with `Space n c`;
+  it is created from `lua/user/init.lua.example` the first time)
+- `lua/user/plugins/*.lua` — extra plugins as normal
+  [lazy.nvim](https://github.com/folke/lazy.nvim) specs, picked up automatically:
+
+```lua
+-- lua/user/plugins/surround.lua
+return {
+  { "kylechui/nvim-surround", event = "VeryLazy", opts = {} },
+}
+```
+
+Want to change something deeper? Every plugin is one small file in
+`lua/plugins/` — copy it into `lua/user/plugins/` with the same plugin name and
+your spec merges over the default.
+
+## Update · Uninstall
+
+```bash
+# inside Neovim
+:NyanUpdate            # git pull + :Lazy sync
+
+# remove NyanVim and restore the backup install.sh made
+~/.config/nvim/uninstall.sh          # or:  uninstall.sh --try  for the side-by-side install
+```
+
 ## Features
 
 - **Lazy everything** — plugins load on `event`/`cmd`/`keys`; only the colorscheme, snacks, treesitter and the dashboard are eager. `:Lazy profile` shows the breakdown.
 - **Theme switcher** — `<Space>th` opens a Telescope picker over the four nightcity styles (NvChad-style): `j`/`k` preview live, `⏎` keeps, `Esc` restores; the pick is remembered across restarts.
 - **Cheatsheet** — `<Space>fk` fuzzy-searches every keymap with its description; `<Space>` + wait shows the groups (which-key).
+- **Try before you switch** — `install.sh --try` installs under `NVIM_APPNAME=nyanvim` next to your own config; `uninstall.sh` restores the backup.
+- **Safe to update** — `:NyanUpdate` pulls and syncs; your changes live in git-ignored `lua/user/`.
 - **Claude in the editor** — [`coder/claudecode.nvim`](https://github.com/coder/claudecode.nvim): run the Claude Code CLI in a split, send selections/buffers, apply diffs. No API key.
 - **opencode** — [`NickvanDyke/opencode.nvim`](https://github.com/NickvanDyke/opencode.nvim): drive the opencode CLI without leaving the editor.
 - **Local LLM** — [`David-Kunz/gen.nvim`](https://github.com/David-Kunz/gen.nvim) + [Ollama](https://ollama.com) (`qwen2.5-coder:7b`): offline code chat, no API, no cloud.
@@ -87,27 +186,6 @@ $ nvim
 
 > **Note:** Distro packages are often too old (e.g. Ubuntu ships 0.9.x). Use the
 > official AppImage or a recent build to get **0.11+**.
-
-## Install
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/kyuna0312/NyanVim/main/install.sh | bash
-```
-
-Or manually:
-
-```bash
-# Back up existing config
-mv ~/.config/nvim ~/.config/nvim.bak
-
-# Clone
-git clone https://github.com/kyuna0312/NyanVim.git ~/.config/nvim
-
-# Start Neovim — plugins install automatically on first launch
-nvim
-```
-
-After install, run `:checkhealth nyanvim` to verify your system is set up correctly.
 
 ## Key Keymaps
 
@@ -182,8 +260,9 @@ lua/
   plugins/               -- one concern per file, all auto-imported
     colorscheme · ui · dashboard · telescope · lsp · conform
     treesitter · editor · which-key · claudecode · ai
+  user/                  -- YOUR overrides (git-ignored): init.lua · plugins/*.lua
   nyanvim/
-    init.lua · health.lua · discipline.lua · theme.lua
+    init.lua (:Nyan* commands) · health.lua · discipline.lua · theme.lua
 ```
 
 ## Theme — Night City Mix
@@ -212,36 +291,33 @@ the terminal supplies the matching `#101a1f` ground.
 Pairs with the same palette across tmux, Ghostty, kitty, WezTerm, starship and
 Übersicht — see [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
 
-## Customize
-
-Add a file under `lua/plugins/` returning a lazy.nvim spec — it's picked up
-automatically by `{ import = "plugins" }`:
-
-```lua
--- lua/plugins/my-plugin.lua
-return {
-  { "owner/repo", opts = {} },
-}
-```
-
-## Update
-
-```bash
-cd ~/.config/nvim
-git pull
-nvim --headless "+Lazy! sync" +qa
-```
-
 ## Languages Included
 
 LSP servers auto-installed via mason: **Lua · Python · TypeScript/JavaScript ·
 Rust · JSON · HTML · CSS**. Treesitter additionally parses Go, Bash, Markdown,
 Vim, and more.
 
+## FAQ
+
+**Icons look like boxes.** Install a [Nerd Font](https://www.nerdfonts.com/) and
+select it in your terminal.
+
+**The background is black, not blue-grey.** NyanVim is transparent; the terminal
+supplies the colour. Set your terminal background to `#101a1f` (matching
+palettes for Ghostty, kitty, WezTerm, Alacritty and tmux are in
+[night-city-palettes](https://github.com/kyuna0312/night-city-palettes)) — or
+set `transparent = false` in `lua/user/plugins/colorscheme.lua`.
+
+**Some language has no LSP.** `:Mason`, find the server, press `i`. It is
+enabled automatically on the next file you open.
+
+**Something else is off.** `:NyanHealth` first, then `:Lazy` for plugin
+errors and `:messages` for the last error text.
+
 ## Troubleshoot
 
 ```
-:checkhealth nyanvim
+:NyanHealth
 ```
 
 ## Performance

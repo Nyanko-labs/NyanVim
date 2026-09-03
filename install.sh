@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_URL="https://github.com/kyuna0312/NyanVim.git"
-NVIM_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
+# Usage:
+#   install.sh          replace ~/.config/nvim (existing config is backed up)
+#   install.sh --try    install side-by-side as ~/.config/nyanvim; run with
+#                       `NVIM_APPNAME=nyanvim nvim` — your own config is untouched
+REPO_URL="${NYANVIM_REPO:-https://github.com/kyuna0312/NyanVim.git}"
+APPNAME="nvim"
+[[ "${1:-}" == "--try" ]] && APPNAME="nyanvim"
+NVIM_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/${APPNAME}"
 BACKUP_SUFFIX=".bak.$(date +%Y%m%d%H%M%S)"
 
 # ── Colors ────────────────────────────────────────────────────
@@ -66,9 +72,9 @@ warn "Nerd Font required for icons. Install from https://www.nerdfonts.com/ if i
 
 # ── Backup existing config ────────────────────────────────────
 if [[ -d "$NVIM_CONFIG" ]]; then
-  local_data="${XDG_DATA_HOME:-$HOME/.local/share}/nvim"
-  local_state="${XDG_STATE_HOME:-$HOME/.local/state}/nvim"
-  local_cache="${XDG_CACHE_HOME:-$HOME/.cache}/nvim"
+  local_data="${XDG_DATA_HOME:-$HOME/.local/share}/${APPNAME}"
+  local_state="${XDG_STATE_HOME:-$HOME/.local/state}/${APPNAME}"
+  local_cache="${XDG_CACHE_HOME:-$HOME/.cache}/${APPNAME}"
 
   warn "Existing Neovim config found. Backing up..."
   mv "$NVIM_CONFIG"                             "${NVIM_CONFIG}${BACKUP_SUFFIX}"   2>/dev/null || true
@@ -85,11 +91,19 @@ success "Cloned NyanVim"
 
 # ── Pre-install plugins (headless) ────────────────────────────
 info "Installing plugins (this takes ~1 minute on first run)..."
-nvim --headless "+Lazy! sync" +qa 2>&1 | tail -3
+NVIM_APPNAME="$APPNAME" nvim --headless "+Lazy! sync" +qa 2>&1 | tail -3
 success "Plugins installed"
 
 echo ""
-success "NyanVim installed! Run 'nvim' to start."
+if [[ "$APPNAME" == "nvim" ]]; then
+  success "NyanVim installed! Run 'nvim' to start."
+else
+  success "NyanVim installed side-by-side. Start it with:"
+  echo ""
+  echo "    NVIM_APPNAME=nyanvim nvim"
+  echo ""
+  info "Tip: alias nyanvim='NVIM_APPNAME=nyanvim nvim'   (add to your shell rc)"
+  info "Your existing ~/.config/nvim was not touched."
+fi
 echo ""
-info "Run ':checkhealth nyanvim' inside Neovim to verify your setup."
-info "Add customizations as files under ~/.config/nvim/lua/plugins/ (auto-imported)"
+info "Inside Neovim: ':NyanHealth' verifies your setup, ':NyanConfig' opens your overrides."

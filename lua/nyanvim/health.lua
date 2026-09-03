@@ -2,12 +2,12 @@ local health = vim.health
 local nyanvim = require("nyanvim")
 
 local required_executables = {
-  { name = "git",      reason = "plugin manager (lazy.nvim)" },
-  { name = "node",     reason = "LSP servers (tsserver, pyright)" },
-  { name = "npm",      reason = "LSP server installation" },
-  { name = "rg",       reason = "Telescope live grep" },
-  { name = "fd",       reason = "Telescope file search" },
-  { name = "lazygit",  reason = "LazyGit integration (optional)", optional = true },
+  { name = "git", reason = "plugin manager (lazy.nvim)" },
+  { name = "node", reason = "LSP servers (tsserver, pyright)" },
+  { name = "npm", reason = "LSP server installation" },
+  { name = "rg", reason = "Telescope live grep" },
+  { name = "fd", reason = "Telescope file search" },
+  { name = "lazygit", reason = "LazyGit integration (optional)", optional = true },
   { name = "tree-sitter", reason = "Treesitter parser installs (nvim-treesitter main branch)" },
 }
 

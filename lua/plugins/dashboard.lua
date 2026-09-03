@@ -1,3 +1,5 @@
+local cfg = vim.fn.stdpath("config")
+
 return {
   "glepnir/dashboard-nvim",
   event = "VimEnter",
@@ -66,7 +68,7 @@ return {
           desc_hl = "String",
           key = "k",
           key_hl = "Number",
-          action = "e ~/.config/nvim/lua/config/keymaps.lua",
+          action = "Telescope keymaps",
         },
         {
           icon = " ",
@@ -75,7 +77,7 @@ return {
           desc_hl = "String",
           key = "p",
           key_hl = "Number",
-          action = "e ~/.config/nvim/lua/plugins/",
+          action = "e " .. cfg .. "/lua/plugins/",
         },
         {
           icon = " ",
@@ -98,11 +100,20 @@ return {
         {
           icon = " ",
           icon_hl = "Title",
-          desc = "Config",
+          desc = "My Config",
           desc_hl = "String",
           key = "c",
           key_hl = "Number",
-          action = "e ~/.config/nvim/",
+          action = "NyanConfig",
+        },
+        {
+          icon = "󰚰 ",
+          icon_hl = "Title",
+          desc = "Update",
+          desc_hl = "String",
+          key = "u",
+          key_hl = "Number",
+          action = "NyanUpdate",
         },
         {
           icon = " ",
@@ -149,5 +160,5 @@ return {
       end,
     },
   },
-  dependencies = { "nvim-tree/nvim-web-devicons" }
+  dependencies = { "nvim-tree/nvim-web-devicons" },
 }

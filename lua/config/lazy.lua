@@ -15,6 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     { import = "plugins" },
+    -- personal plugins: lua/user/plugins/*.lua (git-ignored)
+    vim.uv.fs_stat(vim.fn.stdpath("config") .. "/lua/user/plugins") and { import = "user.plugins" } or nil,
   },
   -- Plugins declare their own event/cmd/keys; anything without one loads eagerly.
   checker = { enabled = false },
