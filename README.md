@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/license-Apache--2.0-be59d6?style=flat-square)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/kyuna0312/NyanVim?style=flat-square&color=f37c4b)](https://github.com/kyuna0312/NyanVim/stargazers)
 
-[**nyanvim.vercel.app**](https://nyanvim.vercel.app) · [Wiki](https://github.com/kyuna0312/NyanVim/wiki) · [Contributing](CONTRIBUTING.md)
+[**nyanvim.vercel.app**](https://nyanvim.vercel.app) · [Docs](docs/wiki/README.md) · [Contributing](CONTRIBUTING.md)
 
 </div>
 
