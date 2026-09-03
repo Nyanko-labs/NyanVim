@@ -14,18 +14,18 @@ A hand-rolled Neovim config — IDE features, NvChad-class startup, VSCode-like 
 Organized [craftzdog](https://github.com/craftzdog/dotfiles-public)-style: a thin
 [lazy.nvim](https://github.com/folke/lazy.nvim) loader and one plugin per file.
 Every plugin is lazy-loaded on an event, command or key; the dashboard comes
-up in ~40ms and a file opens in ~100ms with LSP attached.
+up in ~30ms and a file opens in ~100ms with LSP attached.
 
 ```console
 $ nvim
-[lazy.nvim ]  6/41 plugins · 40ms
+[lazy.nvim ]  6/41 plugins · 30ms
 [mason     ]  69 tools armed
 [treesitter]  79 parsers compiled
 [nyanvim   ]  ready.  > ^ <
 ```
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/kyuna0312/dotfiles/master/assets/logo.png" alt="NyanVim Logo">
+  <img src="https://raw.githubusercontent.com/kyuna0312/dotfiles/main/assets/logo.png" alt="NyanVim Logo">
 </div>
 
 <div align="center">
@@ -51,7 +51,7 @@ $ nvim
 ## Features
 
 - **Lazy everything** — plugins load on `event`/`cmd`/`keys`; only the colorscheme, snacks, treesitter and the dashboard are eager. `:Lazy profile` shows the breakdown.
-- **Theme switcher** — `<Space>th` opens a Telescope picker over the four nightcity styles with live preview (NvChad-style); the pick is remembered across restarts.
+- **Theme switcher** — `<Space>th` opens a Telescope picker over the four nightcity styles (NvChad-style): `j`/`k` preview live, `⏎` keeps, `Esc` restores; the pick is remembered across restarts.
 - **Cheatsheet** — `<Space>fk` fuzzy-searches every keymap with its description; `<Space>` + wait shows the groups (which-key).
 - **Claude in the editor** — [`coder/claudecode.nvim`](https://github.com/coder/claudecode.nvim): run the Claude Code CLI in a split, send selections/buffers, apply diffs. No API key.
 - **opencode** — [`NickvanDyke/opencode.nvim`](https://github.com/NickvanDyke/opencode.nvim): drive the opencode CLI without leaving the editor.
@@ -248,13 +248,15 @@ Vim, and more.
 
 Startup time is benchmarked on every release using `nvim --startuptime`.
 
-Results are committed to `docs/perf/` by CI — one file per release, with mean/median/min/max and a comparison against the previous release.
+Results live in [`docs/perf/`](docs/perf/) — one file per release, with
+mean/median/min/max (written by CI on each tag, or by `./bench.sh` locally).
+Latest: [v1.1.0](docs/perf/2026-09-03-v1.1.0.md) — mean 30ms, median 23ms.
 
-Typical numbers on an M-series Mac (`nvim --startuptime`, 5-run median):
+Before/after lazy-loading on an M-series Mac (`nvim --startuptime`, 5-run median):
 
-| Scenario | Before lazy-loading | Now |
-|----------|--------------------|-----|
-| dashboard (`nvim`) | ~215ms | ~28ms |
+| Scenario | v1.0.0 | v1.1.0 |
+|----------|--------|--------|
+| dashboard (`nvim`) | ~215ms | ~30ms |
 | open a Lua file, LSP attached | ~190ms | ~100ms |
 
 **Run locally:**
