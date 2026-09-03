@@ -1,6 +1,6 @@
 local M = {}
 
-M.version = "1.2.0"
+M.version = "1.3.0"
 
 --- Check if an executable exists on PATH
 ---@param name string
@@ -21,7 +21,8 @@ end
 local config_dir = vim.fn.stdpath("config")
 M.user_config = config_dir .. "/lua/user/init.lua"
 
---- git pull the config, then sync plugins (LunarVim's :LvimUpdate)
+--- git pull the config, then install exactly the plugin versions in the
+--- pulled lazy-lock.json (restore, not update: what was tested is what you get)
 function M.update()
   vim.notify("NyanVim: pulling " .. config_dir .. " …")
   vim.system(
@@ -32,7 +33,7 @@ function M.update()
         return vim.notify("NyanVim update failed:\n" .. r.stderr, vim.log.levels.ERROR)
       end
       vim.notify("NyanVim: " .. vim.trim(r.stdout))
-      require("lazy").sync({ wait = false })
+      require("lazy").restore({ wait = false })
     end)
   )
 end
@@ -53,7 +54,10 @@ function M.setup()
   cmd("NyanHealth", "checkhealth nyanvim", { desc = "Check NyanVim requirements" })
   cmd("NyanConfig", M.edit_user_config, { desc = "Edit your personal overrides" })
   -- personal overrides: lua/user/init.lua is git-ignored, so updates never touch it
-  pcall(require, "user")
+  local ok, err = pcall(require, "user")
+  if not ok and not tostring(err):match("module 'user' not found") then
+    vim.notify("lua/user/init.lua failed:\n" .. tostring(err), vim.log.levels.ERROR)
+  end
 end
 
 return M

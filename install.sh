@@ -90,8 +90,8 @@ git clone --depth=1 "$REPO_URL" "$NVIM_CONFIG"
 success "Cloned NyanVim"
 
 # ── Pre-install plugins (headless) ────────────────────────────
-info "Installing plugins (this takes ~1 minute on first run)..."
-NVIM_APPNAME="$APPNAME" nvim --headless "+Lazy! sync" +qa 2>&1 | tail -3
+info "Installing plugins (pinned to lazy-lock.json; takes ~1 minute)..."
+NVIM_APPNAME="$APPNAME" nvim --headless "+Lazy! restore" +qa 2>&1 | tail -3
 success "Plugins installed"
 
 echo ""

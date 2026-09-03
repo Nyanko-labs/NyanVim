@@ -18,8 +18,13 @@ opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.numberwidth = 5
 opt.fillchars = {
-  horiz = "━", horizup = "┻", horizdown = "┳",
-  vert = "┃", vertleft = "┫", vertright = "┣", verthoriz = "╋",
+  horiz = "━",
+  horizup = "┻",
+  horizdown = "┳",
+  vert = "┃",
+  vertleft = "┫",
+  vertright = "┣",
+  verthoriz = "╋",
   eob = " ",
 }
 

@@ -139,7 +139,7 @@ your spec merges over the default.
 
 ```bash
 # inside Neovim
-:NyanUpdate            # git pull + :Lazy sync
+:NyanUpdate            # git pull, then :Lazy restore to the pinned versions
 
 # remove NyanVim and restore the backup install.sh made
 ~/.config/nvim/uninstall.sh          # or:  uninstall.sh --try  for the side-by-side install
@@ -151,7 +151,8 @@ your spec merges over the default.
 - **Theme switcher** — `<Space>th` opens a Telescope picker over the four nightcity styles (NvChad-style): `j`/`k` preview live, `⏎` keeps, `Esc` restores; the pick is remembered across restarts.
 - **Cheatsheet** — `<Space>fk` fuzzy-searches every keymap with its description; `<Space>` + wait shows the groups (which-key).
 - **Try before you switch** — `install.sh --try` installs under `NVIM_APPNAME=nyanvim` next to your own config; `uninstall.sh` restores the backup.
-- **Safe to update** — `:NyanUpdate` pulls and syncs; your changes live in git-ignored `lua/user/`.
+- **Safe to update** — `:NyanUpdate` pulls and restores; your changes live in git-ignored `lua/user/`.
+- **Reproducible** — plugin versions are pinned in `lazy-lock.json`; install and update use `:Lazy restore`, so every machine gets the versions that were tested. Treesitter parsers for 19 languages install themselves on first launch.
 - **Claude in the editor** — [`coder/claudecode.nvim`](https://github.com/coder/claudecode.nvim): run the Claude Code CLI in a split, send selections/buffers, apply diffs. No API key.
 - **opencode** — [`NickvanDyke/opencode.nvim`](https://github.com/NickvanDyke/opencode.nvim): drive the opencode CLI without leaving the editor.
 - **Local LLM** — [`David-Kunz/gen.nvim`](https://github.com/David-Kunz/gen.nvim) + [Ollama](https://ollama.com) (`qwen2.5-coder:7b`): offline code chat, no API, no cloud.
@@ -322,11 +323,10 @@ errors and `:messages` for the last error text.
 
 ## Performance
 
-Startup time is benchmarked on every release using `nvim --startuptime`.
+Startup time is benchmarked on every release with `./bench.sh` (`nvim --startuptime`, 10 runs).
 
 Results live in [`docs/perf/`](docs/perf/) — one file per release, with
-mean/median/min/max (written by CI on each tag, or by `./bench.sh` locally).
-Latest: [v1.1.0](docs/perf/2026-09-03-v1.1.0.md) — mean 30ms, median 23ms.
+mean/median/min/max. Latest: [v1.2.0](docs/perf/2026-09-03-v1.2.0.md) — mean 29ms, median 26ms.
 
 Before/after lazy-loading on an M-series Mac (`nvim --startuptime`, 5-run median):
 
