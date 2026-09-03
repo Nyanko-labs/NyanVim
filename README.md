@@ -236,6 +236,7 @@ release to [`docs/perf/`](docs/perf/). On an M-series Mac:
 | [v1.1.0](docs/perf/2026-09-03-v1.1.0.md) | 30.2 ms | 23.2 ms | lazy-loading everywhere |
 | [v1.2.0](docs/perf/2026-09-03-v1.2.0.md) | 28.5 ms | 25.7 ms | `:Nyan*` commands, user layer |
 | [v1.3.0](docs/perf/2026-09-03-v1.3.0.md) | 30.8 ms | 27.5 ms | parser auto-install, lockfile restore |
+| [v1.4.0](docs/perf/2026-09-03-v1.4.0.md) | 28.9 ms | 25.3 ms | docs, website, CONTRIBUTING, README rewrite |
 
 Opening a Lua file with the LSP attached takes about 100 ms.
 

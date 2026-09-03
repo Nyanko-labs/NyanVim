@@ -1,6 +1,6 @@
 local M = {}
 
-M.version = "1.3.0"
+M.version = "1.4.0"
 
 --- Check if an executable exists on PATH
 ---@param name string
