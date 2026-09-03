@@ -326,7 +326,7 @@ errors and `:messages` for the last error text.
 Startup time is benchmarked on every release with `./bench.sh` (`nvim --startuptime`, 10 runs).
 
 Results live in [`docs/perf/`](docs/perf/) — one file per release, with
-mean/median/min/max. Latest: [v1.2.0](docs/perf/2026-09-03-v1.2.0.md) — mean 29ms, median 26ms.
+mean/median/min/max. Latest: [v1.3.0](docs/perf/2026-09-03-v1.3.0.md).
 
 Before/after lazy-loading on an M-series Mac (`nvim --startuptime`, 5-run median):
 
