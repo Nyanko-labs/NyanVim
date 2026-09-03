@@ -13,4 +13,6 @@ CLAUDE.md
 # personal overrides (see :NyanConfig)
 lua/user/*
 !lua/user/init.lua.example
-site/.vercel/
+.vercel/
+.vercel
+.env*
