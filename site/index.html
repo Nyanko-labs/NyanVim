@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NyanVim — a small, fast Neovim setup</title>
+<meta name="description" content="NyanVim: a ready-to-use Neovim config. IDE features, 30 ms startup, live theme switcher, and an installer you can try without replacing your own config.">
+<meta property="og:title" content="NyanVim">
+<meta property="og:description" content="Neovim, ready in 30 milliseconds. Try it next to your own config.">
+<meta property="og:image" content="https://raw.githubusercontent.com/kyuna0312/NyanVim/main/assets/screenshots/dashboard.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐱%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Night City Mix — the same palette the editor uses */
+  :root {
+    --bg: #101a1f;
+    --panel: #15242d;
+    --line: #1d2c36;
+    --fg: #b6c5d3;
+    --dim: #5b7189;
+    --teal: #0cc7c2;
+    --azure: #2ba3c9;
+    --apricot: #ffa066;
+    --green: #49d575;
+    --violet: #9d7bd8;
+    --yellow: #f2c74b;
+    --red: #f65162;
+    --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", "Hack Nerd Font", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --measure: 66ch;
+  }
+  * { box-sizing: border-box; }
+  html { color-scheme: dark; background: var(--bg); }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--fg);
+    background: var(--bg);
+  }
+  a { color: var(--azure); text-underline-offset: .15em; }
+  a:hover { color: var(--teal); }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+  code, kbd, pre { font-family: var(--mono); }
+  code { font-size: .92em; color: var(--apricot); }
+  kbd {
+    font-size: .85em;
+    color: var(--teal);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: .05em .4em;
+    white-space: nowrap;
+  }
+  main { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem 4rem; }
+  h1, h2 { font-weight: 600; letter-spacing: -.01em; line-height: 1.15; margin: 0; }
+  h1 { font-size: clamp(2rem, 5vw, 3.25rem); max-width: 22ch; }
+  h2 { font-size: 1.5rem; margin-top: 4.5rem; margin-bottom: 1rem; }
+  p { max-width: var(--measure); margin: .75rem 0; }
+  .muted { color: var(--dim); }
+
+  /* ---- nav ---- */
+  nav {
+    display: flex; gap: 1.5rem; align-items: baseline; flex-wrap: wrap;
+    padding: 1.25rem 0; font-size: .95rem;
+  }
+  nav .brand { font-family: var(--mono); color: var(--fg); text-decoration: none; font-weight: 500; margin-right: auto; }
+  nav a:not(.brand) { color: var(--dim); text-decoration: none; }
+  nav a:not(.brand):hover { color: var(--teal); }
+
+  /* ---- hero: the real dashboard, in a terminal ---- */
+  .term {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,.7);
+  }
+  .term-bar {
+    display: flex; align-items: center; gap: .5rem;
+    padding: .55rem .9rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono); font-size: .8rem; color: var(--dim);
+  }
+  .term-bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--line); display: inline-block; }
+  .term-bar span { margin-left: .5rem; }
+  .term pre {
+    margin: 0; padding: 1.25rem 1.5rem;
+    font-size: clamp(.5rem, 1.35vw, .85rem);
+    line-height: 1.3;
+    overflow-x: auto;
+    color: var(--fg);
+  }
+  .term .banner { color: #b6c5d3; }
+  .term .cat { color: var(--violet); }
+  .term .item { color: var(--teal); }
+  .term .key { color: var(--apricot); }
+  .term .by { color: var(--dim); }
+  .term .foot { color: var(--dim); }
+  .term .foot b { color: var(--green); font-weight: 500; }
+  #boot { visibility: hidden; }
+  #boot.on { visibility: visible; }
+  .cursor::after { content: "▍"; color: var(--teal); animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cursor::after { animation: none; } }
+
+  .lede { margin-top: 2.5rem; }
+  .lede p { font-size: 1.15rem; }
+
+  /* ---- install line ---- */
+  .install {
+    margin: 1.75rem 0 0;
+    display: grid; gap: .5rem;
+    max-width: 52rem;
+  }
+  .install label { font-size: .9rem; color: var(--dim); }
+  .cmd {
+    display: flex; align-items: center; gap: .75rem;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+    padding: .7rem .9rem;
+    font-family: var(--mono); font-size: .9rem;
+  }
+  .cmd code { color: var(--fg); white-space: nowrap; flex: 1; min-width: 0; overflow-x: auto; padding-bottom: .1rem; }
+  .cmd code b { color: var(--green); font-weight: 500; }
+  .cmd button {
+    margin-left: auto; flex: none;
+    font: inherit; font-size: .8rem;
+    color: var(--teal); background: transparent;
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: .25rem .6rem; cursor: pointer;
+  }
+  .cmd button:hover { border-color: var(--teal); }
+  .install .then { color: var(--dim); font-size: .95rem; }
+
+  /* ---- screenshots ---- */
+  .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1.25rem; margin-top: 1.25rem; }
+  .shots figure { margin: 0; }
+  .shots img { width: 100%; display: block; border-radius: 8px; border: 1px solid var(--line); }
+  .shots figcaption { font-size: .9rem; color: var(--dim); margin-top: .5rem; }
+  .shots figcaption kbd { font-size: .8em; }
+
+  /* ---- keys table: reads like which-key ---- */
+  table { border-collapse: collapse; width: 100%; max-width: 46rem; margin-top: 1rem; font-size: .98rem; }
+  td { padding: .45rem .75rem .45rem 0; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+  td:first-child { white-space: nowrap; width: 12rem; }
+
+  /* ---- inside list ---- */
+  .inside { columns: 2; column-gap: 3rem; max-width: 56rem; padding: 0; list-style: none; margin: 1rem 0 0; }
+  .inside li { break-inside: avoid; margin: 0 0 .9rem; padding-left: 1.1rem; text-indent: -1.1rem; }
+  .inside li::before { content: "▸ "; color: var(--teal); }
+  .inside li strong { font-weight: 500; color: #dfe7ee; }
+  @media (max-width: 40rem) { .inside { columns: 1; } td:first-child { width: auto; } }
+
+  footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--dim); font-size: .9rem; display: flex; flex-wrap: wrap; gap: 1.5rem; }
+  footer a { color: var(--dim); }
+</style>
+</head>
+<body>
+<main>
+  <nav>
+    <a class="brand" href="#">🐱 nyanvim</a>
+    <a href="#install">Install</a>
+    <a href="#keys">Keys</a>
+    <a href="#inside">Inside</a>
+    <a href="https://github.com/kyuna0312/NyanVim/wiki">Wiki</a>
+    <a href="https://github.com/kyuna0312/NyanVim">GitHub</a>
+  </nav>
+
+  <section class="term" aria-label="NyanVim dashboard">
+    <div class="term-bar"><i></i><i></i><i></i><span>~ — nvim</span></div>
+<pre><span class="banner">  ███╗   ██╗██╗   ██╗ █████╗ ███╗   ██╗██╗   ██╗██╗███╗   ███╗
+  ████╗  ██║╚██╗ ██╔╝██╔══██╗████╗  ██║██║   ██║██║████╗ ████║
+  ██╔██╗ ██║ ╚████╔╝ ███████║██╔██╗ ██║██║   ██║██║██╔████╔██║
+  ██║╚██╗██║  ╚██╔╝  ██╔══██║██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║
+  ██║ ╚████║   ██║   ██║  ██║██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║
+  ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝</span>
+
+<span class="cat">        /\_/\  ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋
+       ( ^.^ ) ██████████████████████████████████████
+        > ^ <  ██ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ██
+       /|   |\  ██████████████████████████████████████
+      (_|   |_) ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋</span>
+
+<span class="by">                        by  k y u n a 0 3 1 2</span>
+
+<span class="item">                     Find File      </span><span class="key">[f]</span>
+<span class="item">                     Recent Files   </span><span class="key">[r]</span>
+<span class="item">                     Find Word      </span><span class="key">[w]</span>
+<span class="item">                     Theme          </span><span class="key">[t]</span>
+<span class="item">                     My Config      </span><span class="key">[c]</span>
+<span class="item">                     Update         </span><span class="key">[u]</span>
+
+<span id="boot" class="foot">            [lazy.nvim ]  6/41 plugins · <b>30ms</b>
+            [mason     ]  69 tools armed
+            [treesitter]  79 parsers compiled
+            [nyanvim   ]  ready.  > ^ &lt;</span><span id="cur" class="cursor"></span></pre>
+  </section>
+
+  <div class="lede">
+    <h1>Neovim, ready in thirty milliseconds.</h1>
+    <p>NyanVim is a complete Neovim setup you can read in one sitting: about
+    1,200 lines of Lua, one plugin per file. Open it and you have a file tree,
+    fuzzy finder, language servers, completion, Git, a terminal and Claude in a
+    split. Every plugin loads only when you use it, so the dashboard is up
+    before your hand leaves the Enter key.</p>
+  </div>
+
+  <section class="install" id="install">
+    <label for="try">Try it next to your own config. Nothing in <code>~/.config/nvim</code> is touched.</label>
+    <div class="cmd"><code id="try">curl -fsSL https://raw.githubusercontent.com/kyuna0312/NyanVim/main/install.sh | bash -s -- <b>--try</b></code><button type="button" data-copy="try">Copy</button></div>
+    <div class="cmd"><code id="run">NVIM_APPNAME=nyanvim nvim</code><button type="button" data-copy="run">Copy</button></div>
+    <p class="then">Plugins install themselves on the first launch. Like it? Run the same line without <code>--try</code> to make it your default; your old config is backed up. <a href="https://github.com/kyuna0312/NyanVim#requirements">Requirements</a>: Neovim 0.11+, git, node, ripgrep, fd, a C compiler and a Nerd Font.</p>
+  </section>
+
+  <h2>What it looks like</h2>
+  <div class="shots">
+    <figure><img src="https://raw.githubusercontent.com/kyuna0312/NyanVim/main/assets/screenshots/ide-view.png" alt="NyanVim editing a Lua file with the file tree open on the right" loading="lazy"><figcaption>File tree, statusline, syntax from Treesitter. <kbd>Ctrl b</kbd> toggles the tree.</figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/kyuna0312/NyanVim/main/assets/screenshots/telescope.png" alt="Telescope fuzzy finder with a code preview" loading="lazy"><figcaption>Telescope: find files, grep the project, browse keymaps. <kbd>Space f f</kbd></figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/kyuna0312/NyanVim/main/assets/screenshots/lsp.png" alt="LSP hover documentation popup over a function" loading="lazy"><figcaption>Seven language servers pre-installed; <kbd>K</kbd> shows docs, <kbd>g d</kbd> jumps to the definition.</figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/kyuna0312/NyanVim/main/assets/screenshots/theme.png" alt="Theme picker previewing the Box UK palette" loading="lazy"><figcaption>Theme picker: <kbd>j</kbd>/<kbd>k</kbd> preview live, Enter keeps, Esc puts it back. <kbd>Space t h</kbd></figcaption></figure>
+  </div>
+
+  <h2 id="keys">Your first keys</h2>
+  <p>The leader is <kbd>Space</kbd>. Press it and pause: a menu lists every group. These get you through a normal day.</p>
+  <table>
+    <tr><td><kbd>Space f f</kbd></td><td>find a file by name</td></tr>
+    <tr><td><kbd>Space f g</kbd></td><td>search text in the whole project</td></tr>
+    <tr><td><kbd>Ctrl b</kbd></td><td>show or hide the file tree</td></tr>
+    <tr><td><kbd>Shift h</kbd> <kbd>Shift l</kbd></td><td>previous, next open file</td></tr>
+    <tr><td><kbd>g d</kbd> <kbd>K</kbd></td><td>go to definition, show docs</td></tr>
+    <tr><td><kbd>Space c a</kbd></td><td>code action: fix, import, refactor</td></tr>
+    <tr><td><kbd>Space c f</kbd></td><td>format the file</td></tr>
+    <tr><td><kbd>Space g g</kbd></td><td>LazyGit</td></tr>
+    <tr><td><kbd>Ctrl \</kbd></td><td>floating terminal</td></tr>
+    <tr><td><kbd>Space a c</kbd></td><td>Claude Code in a split</td></tr>
+    <tr><td><kbd>Space n</kbd></td><td>NyanVim menu: update, health, your config, theme</td></tr>
+  </table>
+  <p class="muted">Forgot one? <kbd>Space f k</kbd> searches every keymap by what it does.</p>
+
+  <h2 id="inside">What's inside</h2>
+  <ul class="inside">
+    <li><strong>lazy.nvim</strong> loads 41 plugins on demand; 6 at startup.</li>
+    <li><strong>LSP</strong> through mason and the Neovim 0.11 <code>vim.lsp.config</code> API. Lua, Python, TypeScript, Rust, JSON, HTML, CSS out of the box; anything you install in <code>:Mason</code> is enabled automatically.</li>
+    <li><strong>Completion</strong> with nvim-cmp, LuaSnip and friendly-snippets.</li>
+    <li><strong>Treesitter</strong> highlighting and indent; 19 parsers install themselves on first launch.</li>
+    <li><strong>Telescope</strong> with fzf, project switcher and yank history.</li>
+    <li><strong>Git</strong>: gitsigns, diffview, LazyGit.</li>
+    <li><strong>AI</strong>: Claude Code and opencode in a split, or a local Ollama model, all optional.</li>
+    <li><strong>Formatting</strong> on save with conform: stylua, black, prettier, LSP fallback.</li>
+    <li><strong>Night City Mix</strong> theme, shared with tmux, Ghostty, kitty and WezTerm through <a href="https://github.com/kyuna0312/night-city-palettes">night-city-palettes</a>. Four styles, switch live.</li>
+    <li><strong>Your overrides</strong> live in <code>lua/user/</code>, git-ignored, so <code>:NyanUpdate</code> never overwrites them.</li>
+    <li><strong>Reproducible</strong>: plugin versions are pinned; install and update restore exactly what was tested.</li>
+    <li><strong>Uninstall</strong> in one command, and your previous config comes back.</li>
+  </ul>
+
+  <footer>
+    <span>NyanVim by <a href="https://github.com/kyuna0312">kyuna0312</a>, Apache-2.0.</span>
+    <a href="https://github.com/kyuna0312/NyanVim">Source</a>
+    <a href="https://github.com/kyuna0312/NyanVim/wiki">Wiki</a>
+    <a href="https://github.com/kyuna0312/NyanVim/blob/main/CONTRIBUTING.md">Contributing</a>
+    <a href="https://github.com/kyuna0312/NyanVim/issues">Issues</a>
+  </footer>
+</main>
+<script>
+  // One page-load moment: the dashboard "boots" — the footer lines appear
+  // after a beat, the way lazy.nvim's stats land after the plugins load.
+  var boot = document.getElementById('boot'), cur = document.getElementById('cur');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(function () { boot.classList.add('on'); cur.remove(); }, reduce ? 0 : 700);
+
+  document.querySelectorAll('button[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var text = document.getElementById(b.dataset.copy).textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+      });
+    });
+  });
+</script>
+</body>
+</html>
