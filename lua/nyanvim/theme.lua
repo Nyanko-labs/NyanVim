@@ -33,18 +33,22 @@ function M.pick()
   local previous, chosen = vim.g.colors_name, nil
 
   pickers
-    .new(require("telescope.themes").get_dropdown({ previewer = false }), {
-      prompt_title = "NyanVim theme",
+    .new(require("telescope.themes").get_dropdown({ previewer = false, initial_mode = "normal" }), {
+      -- normal mode: j/k preview straight away, <CR> keeps, <Esc> restores
+      prompt_title = "NyanVim theme  (j/k preview · ⏎ keep · esc cancel)",
       finder = finders.new_table(M.styles),
       sorter = conf.generic_sorter({}),
       attach_mappings = function(bufnr)
         action_set.shift_selection:enhance({
           post = function()
-            vim.cmd.colorscheme("nightcity-" .. action_state.get_selected_entry()[1])
+            local entry = action_state.get_selected_entry()
+            if entry then
+              vim.cmd.colorscheme("nightcity-" .. entry[1])
+            end
           end,
         })
         actions.select_default:replace(function()
-          chosen = action_state.get_selected_entry()[1]
+          chosen = (action_state.get_selected_entry() or {})[1]
           actions.close(bufnr)
         end)
         actions.close:enhance({
