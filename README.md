@@ -120,6 +120,7 @@ The leader is **Space**. Press it and pause: which-key lists every group.
 | `Space f g` | search text in the whole project |
 | `Space e` | show or hide the file tree |
 | `Shift h` / `Shift l` | previous / next open file |
+| `s` | jump anywhere on screen (flash) |
 | `g d` · `K` | go to definition · docs under the cursor |
 | `Space c a` | code action: fix, import, refactor |
 | `Space c f` | format the file |

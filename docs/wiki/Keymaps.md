@@ -29,6 +29,9 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Shift h` / `Shift l` | previous / next buffer |
 | `Space b d` / `b o` / `b p` | delete / close others / pick buffer |
 | `Space ?` | every mapping active in this buffer |
+| `Ctrl h/j/k/l` | move between splits, and tmux panes |
+| `s` / `S` | flash jump / treesitter select |
+| `g s a` / `g s d` / `g s r` | surround add / delete / replace |
 
 ## Code and LSP — `Space c`
 
@@ -40,6 +43,7 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Space c a` | code action |
 | `Space c f` | format (conform, LSP fallback) |
 | `Space c o` | organize imports |
+| `Space c d` / `Space c s` | diagnostics list / symbols outline (Trouble) |
 | `[d` / `]d` | previous / next diagnostic (Neovim default) |
 
 ## Git — `Space g`

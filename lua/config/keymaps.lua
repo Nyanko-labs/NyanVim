@@ -3,10 +3,7 @@
 local map = vim.keymap.set
 
 -- Window navigation
-map("n", "<C-h>", "<C-w>h", { desc = "Navigate left window" })
-map("n", "<C-j>", "<C-w>j", { desc = "Navigate down window" })
-map("n", "<C-k>", "<C-w>k", { desc = "Navigate up window" })
-map("n", "<C-l>", "<C-w>l", { desc = "Navigate right window" })
+-- <C-h/j/k/l> window moves come from vim-tmux-navigator (editor.lua): same keys cross tmux panes
 map("n", "<M-1>", "1<C-w>w", { desc = "Go to window 1" })
 map("n", "<M-2>", "2<C-w>w", { desc = "Go to window 2" })
 map("n", "<M-3>", "3<C-w>w", { desc = "Go to window 3" })
