@@ -5,6 +5,22 @@ return {
     opts = {
       current_line_blame = true,
       current_line_blame_opts = { delay = 200 },
+      -- buffer-local hunk maps; the Git group in keymaps.lua covers the rest
+      on_attach = function(bufnr)
+        local gs = require("gitsigns")
+        local function map(l, r, desc)
+          vim.keymap.set("n", l, r, { buffer = bufnr, desc = desc })
+        end
+        map("]h", function()
+          gs.nav_hunk("next")
+        end, "Next hunk")
+        map("[h", function()
+          gs.nav_hunk("prev")
+        end, "Previous hunk")
+        map("<leader>gp", gs.preview_hunk, "Preview hunk")
+        map("<leader>ga", gs.stage_hunk, "Stage hunk")
+        map("<leader>gr", gs.reset_hunk, "Reset hunk")
+      end,
     },
   },
   {

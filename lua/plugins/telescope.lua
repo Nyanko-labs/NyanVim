@@ -11,6 +11,27 @@ return {
     },
     config = function()
       require("telescope").setup({
+        defaults = {
+          -- build output and lockfiles never belong in a picker
+          file_ignore_patterns = {
+            "^%.git/",
+            "node_modules/",
+            "dist/",
+            "build/",
+            "target/",
+            "%.next/",
+            "__pycache__/",
+            "%.venv/",
+            "venv/",
+            "vendor/",
+            "%.dart_tool/",
+            "package%-lock%.json",
+            "yarn%.lock",
+            "pnpm%-lock%.yaml",
+            "Cargo%.lock",
+            "%.DS_Store",
+          },
+        },
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown(),

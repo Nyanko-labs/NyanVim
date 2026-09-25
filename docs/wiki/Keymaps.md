@@ -28,6 +28,7 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Alt 1..4` | jump to window N |
 | `Shift h` / `Shift l` | previous / next buffer |
 | `Space b d` / `b o` / `b p` | delete / close others / pick buffer |
+| `Space ?` | every mapping active in this buffer |
 
 ## Code and LSP — `Space c`
 
@@ -38,6 +39,8 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Space c r` | rename |
 | `Space c a` | code action |
 | `Space c f` | format (conform, LSP fallback) |
+| `Space c o` | organize imports |
+| `[d` / `]d` | previous / next diagnostic (Neovim default) |
 
 ## Git — `Space g`
 
@@ -46,6 +49,8 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Space g g` | LazyGit |
 | `Space g d` | Diffview |
 | `Space g s` / `g b` / `g c` | status / branches / commits (Telescope) |
+| `]h` / `[h` | next / previous hunk |
+| `Space g p` / `g a` / `g r` | preview / stage / reset hunk |
 
 ## Project, terminal, theme
 
@@ -55,9 +60,10 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Space p f` | git files |
 | `Space p t` | TODO comments |
 | `Space t t` / `Ctrl \` | floating terminal |
+| `Space t f` | toggle format on save |
 | `Space t h` | theme picker |
 
-## AI — `Space a` / `Space o`
+## AI — `Space a`
 
 | Key | Action |
 |-----|--------|

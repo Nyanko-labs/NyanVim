@@ -29,6 +29,14 @@ return {
       vim.diagnostic.config({
         virtual_text = true,
         severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.INFO] = " ",
+            [vim.diagnostic.severity.HINT] = "󰌵 ",
+          },
+        },
       })
 
       -- Shared capabilities for every server
@@ -43,6 +51,8 @@ return {
             diagnostics = {
               globals = { "vim" },
             },
+            -- completion for vim.* while editing this config
+            workspace = { library = { vim.env.VIMRUNTIME .. "/lua" }, checkThirdParty = false },
           },
         },
       })

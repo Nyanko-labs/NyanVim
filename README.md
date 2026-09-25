@@ -125,6 +125,7 @@ The leader is **Space**. Press it and pause: which-key lists every group.
 | `Space c f` | format the file |
 | `Space c r` | rename symbol everywhere |
 | `Space g g` | LazyGit |
+| `]h` / `Space g p` | next hunk / preview hunk |
 | `Ctrl \` | floating terminal |
 | `Space a c` | Claude Code in a split |
 | `Space t h` | theme picker |

@@ -19,6 +19,11 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window wi
 map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
 
 -- Editing
+-- keep the cursor line centred after a half-page jump or a search hit
+map("n", "<C-d>", "<C-d>zz", { desc = "Half page down" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Half page up" })
+map("n", "n", "nzzzv", { desc = "Next match" })
+map("n", "N", "Nzzzv", { desc = "Previous match" })
 map("v", "<", "<gv", { desc = "Indent left" })
 map("v", ">", ">gv", { desc = "Indent right" })
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move text down" })
@@ -52,17 +57,16 @@ map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
 -- Code
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
+map("n", "<leader>co", function()
+  vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" }, diagnostics = {} }, apply = true })
+end, { desc = "Organize imports" })
 map({ "n", "v" }, "<leader>cf", function()
   require("conform").format({ lsp_format = "fallback" })
 end, { desc = "Format code" })
 
 -- File (telescope)
 map("n", "<leader>ff", function()
-  require("telescope.builtin").find_files({
-    hidden = true,
-    no_ignore = false,
-    file_ignore_patterns = { ".git/", "node_modules/" },
-  })
+  require("telescope.builtin").find_files({ hidden = true })
 end, { desc = "Find files" })
 map("n", "<leader>fg", function()
   require("telescope.builtin").live_grep({
@@ -115,6 +119,10 @@ end, { desc = "Toggle Explorer" })
 
 -- Toggle / Theme
 map("n", "<leader>tt", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
+map("n", "<leader>tf", function()
+  vim.g.nyanvim_autoformat = not vim.g.nyanvim_autoformat
+  vim.notify("Format on save: " .. (vim.g.nyanvim_autoformat and "on" or "off"))
+end, { desc = "Toggle format on save" })
 map("n", "<leader>th", function()
   require("nyanvim.theme").pick()
 end, { desc = "Theme picker" })
@@ -127,6 +135,10 @@ end, { desc = "Ask opencode" })
 map({ "n", "x" }, "<leader>ap", function()
   require("opencode").select()
 end, { desc = "opencode menu" })
+
+map("n", "<leader>?", function()
+  require("which-key").show({ global = false })
+end, { desc = "Keymaps for this buffer" })
 
 -- NyanVim menu (LunarVim's <leader>L, doom's <leader>h)
 map("n", "<leader>nu", "<cmd>NyanUpdate<cr>", { desc = "Update NyanVim" })

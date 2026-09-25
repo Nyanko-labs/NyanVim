@@ -17,11 +17,17 @@ return {
         css = { "prettier" },
         html = { "prettier" },
         markdown = { "prettier" },
+        yaml = { "prettier" },
+        go = { "gofmt" }, -- ships with Go
+        sh = { "shfmt" },
       },
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_format = "fallback",
-      },
+      -- <leader>tf flips vim.g.nyanvim_autoformat (default on)
+      format_on_save = function()
+        if vim.g.nyanvim_autoformat == false then
+          return
+        end
+        return { timeout_ms = 500, lsp_format = "fallback" }
+      end,
     },
   },
 }

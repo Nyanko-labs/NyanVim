@@ -9,6 +9,10 @@ local required_executables = {
   { name = "fd", reason = "faster Telescope file search (optional)", optional = true },
   { name = "lazygit", reason = "LazyGit integration (optional)", optional = true },
   { name = "tree-sitter", reason = "Treesitter parser installs (nvim-treesitter main branch)" },
+  -- formatters conform.nvim expects; without one it falls back to the LSP
+  { name = "stylua", reason = "Lua formatting (optional)", optional = true },
+  { name = "prettier", reason = "JS/TS/CSS/JSON/Markdown formatting (optional)", optional = true },
+  { name = "black", reason = "Python formatting (optional)", optional = true },
 }
 
 local function check_nvim_version()
