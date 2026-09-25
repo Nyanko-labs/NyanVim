@@ -225,8 +225,9 @@ newest backup `install.sh` made.
 
 ## Performance
 
-`./bench.sh --runs 10` measures `nvim --startuptime` and writes one file per
-release to [`docs/perf/`](docs/perf/). On an M-series Mac:
+`./bench.sh --runs 10` measures `nvim --startuptime` headless (the config's own
+cost, before the terminal draws anything) and writes one file per release to
+[`docs/perf/`](docs/perf/). On an M-series Mac:
 
 | Release | Mean | Median | What changed |
 |---------|------|--------|--------------|

@@ -21,7 +21,7 @@ your `~/.config/nvim`. `~/.config/nyanvim/uninstall.sh --try` removes it again.
 | Path | Rule |
 |------|------|
 | `lua/plugins/*.lua` | One concern per file, one lazy.nvim spec list per file. Every plugin declares `event`, `cmd`, `keys` or `ft`; only the colorscheme, snacks, treesitter and the dashboard load eagerly. |
-| `lua/config/keymaps.lua` | The **only** place global keymaps are set. Plugin `keys = {}` tables and buffer-local `on_attach` maps are fine; `vim.keymap.set` anywhere else is not. |
+| `lua/config/keymaps.lua` | The **only** place global keymaps are set. Plugin `keys = {}` tables, buffer-local maps (`on_attach`, the `q`-to-close autocmd) and the opt-in expr maps in `nyanvim/discipline.lua` are the exceptions; `vim.keymap.set` anywhere else is not. |
 | `lua/config/which-key.lua` | Group labels only, no mappings. |
 | `lua/plugins/colorscheme.lua` | Owns transparency and the theme. No highlight hacks in autocmds. |
 | `lua/nyanvim/` | NyanVim's own code: `:Nyan*` commands, health, theme picker, discipline. |

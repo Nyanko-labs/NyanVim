@@ -10,6 +10,8 @@ autocmd("TextYankPost", {
   end,
 })
 
+-- equalalways is off (opening the tree must not reflow every split); only a
+-- terminal resize re-balances.
 autocmd("VimResized", {
   group = general,
   callback = function()
@@ -59,25 +61,6 @@ autocmd("CursorHold", {
 
 -- Transparency lives in the colorscheme config (plugins/colorscheme.lua),
 -- not here: the theme's transparent option replaces the old bg-clearing hack.
-
-local treesitter_group = augroup("TreesitterWindow", { clear = true })
-
-autocmd("FileType", {
-  group = treesitter_group,
-  pattern = "nvim-treesitter-playground",
-  callback = function(event)
-    vim.cmd("wincmd L")
-    vim.cmd("vertical resize 40")
-    vim.cmd("set winfixwidth")
-  end,
-})
-
-autocmd("VimEnter", {
-  group = augroup("WindowOptimize", { clear = true }),
-  callback = function()
-    vim.cmd("wincmd =")
-  end,
-})
 
 local function smart_split()
   local width = vim.api.nvim_win_get_width(0)

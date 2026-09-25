@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# bench.sh — NyanVim startup time benchmark
+# bench.sh — NyanVim startup time benchmark (headless: config cost only, no terminal draw)
 # Usage: ./bench.sh [--runs N] [--version VER] [--threshold PCT]
 set -euo pipefail
 
