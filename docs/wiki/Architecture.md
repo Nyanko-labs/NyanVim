@@ -9,7 +9,7 @@ lua/config/
   autocmds.lua           autocommands
   which-key.lua          <leader> group labels only
 lua/plugins/             one concern per file, every plugin lazy on event/cmd/keys
-  colorscheme · ui · dashboard · telescope · lsp · conform · treesitter · editor · which-key · claudecode · ai
+  colorscheme · ui · dashboard · fzf · lsp · conform · lint · treesitter · editor · which-key · claudecode · ai
 lua/nyanvim/
   init.lua               :NyanUpdate / :NyanHealth / :NyanConfig, loads lua/user
   theme.lua              theme picker + persistence

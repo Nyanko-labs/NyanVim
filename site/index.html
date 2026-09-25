@@ -194,7 +194,7 @@
 <span class="item">                     My Config      </span><span class="key">[c]</span>
 <span class="item">                     Update         </span><span class="key">[u]</span>
 
-<span id="boot" class="foot">            [lazy.nvim ]  6/41 plugins · <b>30ms</b>
+<span id="boot" class="foot">            [lazy.nvim ]  4/43 plugins · <b>29ms</b>
             [mason     ]  69 tools armed
             [treesitter]  79 parsers compiled
             [nyanvim   ]  ready.  > ^ &lt;</span><span id="cur" class="cursor"></span></pre>
@@ -219,7 +219,7 @@
   <h2>What it looks like</h2>
   <div class="shots">
     <figure><img src="https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/assets/screenshots/ide-view.png" alt="NyanVim editing a Lua file with the file tree open on the right" loading="lazy"><figcaption>File tree, statusline, syntax from Treesitter. <kbd>Space e</kbd> toggles the tree.</figcaption></figure>
-    <figure><img src="https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/assets/screenshots/telescope.png" alt="Telescope fuzzy finder with a code preview" loading="lazy"><figcaption>Telescope: find files, grep the project, browse keymaps. <kbd>Space f f</kbd></figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/assets/screenshots/telescope.png" alt="fzf-lua file picker with a code preview" loading="lazy"><figcaption>fzf-lua: find files, grep the project, browse keymaps. <kbd>Space f f</kbd></figcaption></figure>
     <figure><img src="https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/assets/screenshots/lsp.png" alt="LSP hover documentation popup over a function" loading="lazy"><figcaption>Seven language servers pre-installed; <kbd>K</kbd> shows docs, <kbd>g d</kbd> jumps to the definition.</figcaption></figure>
     <figure><img src="https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/assets/screenshots/theme.png" alt="Theme picker previewing the Box UK palette" loading="lazy"><figcaption>Theme picker: <kbd>j</kbd>/<kbd>k</kbd> preview live, Enter keeps, Esc puts it back. <kbd>Space t h</kbd></figcaption></figure>
   </div>
@@ -243,11 +243,11 @@
 
   <h2 id="inside">What's inside</h2>
   <ul class="inside">
-    <li><strong>lazy.nvim</strong> loads 41 plugins on demand; 6 at startup.</li>
+    <li><strong>lazy.nvim</strong> loads 43 plugins on demand; 4 at startup.</li>
     <li><strong>LSP</strong> through mason and the Neovim 0.11 <code>vim.lsp.config</code> API. Lua, Python, TypeScript, Rust, JSON, HTML, CSS out of the box; anything you install in <code>:Mason</code> is enabled automatically.</li>
     <li><strong>Completion</strong> with nvim-cmp, LuaSnip and friendly-snippets.</li>
     <li><strong>Treesitter</strong> highlighting and indent; 19 parsers install themselves on first launch.</li>
-    <li><strong>Telescope</strong> with fzf, project switcher and yank history.</li>
+    <li><strong>fzf-lua</strong> pickers, project switcher and yank history.</li>
     <li><strong>Git</strong>: gitsigns, diffview, LazyGit.</li>
     <li><strong>AI</strong>: Claude Code and opencode in a split, or a local Ollama model, all optional.</li>
     <li><strong>Formatting</strong> on save with conform: stylua, black, prettier, LSP fallback.</li>

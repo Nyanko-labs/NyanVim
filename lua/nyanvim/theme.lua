@@ -26,44 +26,50 @@ function M.apply(style)
 end
 
 function M.pick()
-  local pickers, finders = require("telescope.pickers"), require("telescope.finders")
-  local conf = require("telescope.config").values
-  local actions, action_state = require("telescope.actions"), require("telescope.actions.state")
-  local action_set = require("telescope.actions.set")
   local previous, chosen = vim.g.colors_name, nil
 
-  pickers
-    .new(require("telescope.themes").get_dropdown({ previewer = false, initial_mode = "normal" }), {
-      -- normal mode: j/k preview straight away, <CR> keeps, <Esc> restores
-      prompt_title = "NyanVim theme  (j/k preview · ⏎ keep · esc cancel)",
-      finder = finders.new_table(M.styles),
-      sorter = conf.generic_sorter({}),
-      attach_mappings = function(bufnr)
-        action_set.shift_selection:enhance({
-          post = function()
-            local entry = action_state.get_selected_entry()
-            if entry then
-              vim.cmd.colorscheme("nightcity-" .. entry[1])
-            end
-          end,
-        })
-        actions.select_default:replace(function()
-          chosen = (action_state.get_selected_entry() or {})[1]
-          actions.close(bufnr)
-        end)
-        actions.close:enhance({
-          post = function()
-            if chosen then
-              M.apply(chosen)
-            else
-              vim.cmd.colorscheme(previous)
-            end
-          end,
-        })
-        return true
-      end,
+  -- fzf-lua asks the previewer to fill its buffer for every highlighted entry:
+  -- that hook is the live preview, the buffer just shows a sample
+  local Preview = require("fzf-lua.previewer.builtin").base:extend()
+  function Preview:new(o, opts, fzf_win)
+    Preview.super.new(self, o, opts, fzf_win)
+    setmetatable(self, Preview)
+    return self
+  end
+  function Preview:populate_preview_buf(entry)
+    vim.cmd.colorscheme("nightcity-" .. entry)
+    local buf = self:get_tmp_buffer()
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, {
+      "-- nightcity-" .. entry,
+      'local greet = function(name) return "hi " .. name end',
+      "for i = 1, 3 do print(greet(i)) end",
     })
-    :find()
+    vim.bo[buf].filetype = "lua"
+    self:set_preview_buf(buf)
+  end
+  function Preview:close()
+    if not chosen then
+      vim.cmd.colorscheme(previous) -- Esc, or the window closed without a pick
+    end
+    Preview.super.close(self)
+  end
+
+  require("fzf-lua").fzf_exec(M.styles, {
+    prompt = "Theme> ",
+    previewer = {
+      _ctor = function()
+        return Preview
+      end,
+    },
+    winopts = { height = 0.4, width = 0.5, preview = { layout = "vertical", vertical = "down:45%" } },
+    fzf_opts = { ["--header"] = "j/k preview · ⏎ keep · esc cancel", ["--layout"] = "reverse-list" },
+    actions = {
+      ["enter"] = function(selected)
+        chosen = selected[1]
+        M.apply(chosen)
+      end,
+    },
+  })
 end
 
 return M

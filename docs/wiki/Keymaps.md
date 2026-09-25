@@ -16,6 +16,7 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Space s w` | grep the word under the cursor |
 | `Space s b` | search in the current buffer |
 | `Space s s` / `Space s S` | document / workspace symbols |
+| `Space s r` | resume the last picker |
 | `Space *` | grep whole word under cursor |
 
 ## Explorer, windows, buffers
@@ -52,7 +53,7 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 |-----|--------|
 | `Space g g` | LazyGit |
 | `Space g d` | Diffview |
-| `Space g s` / `g b` / `g c` | status / branches / commits (Telescope) |
+| `Space g s` / `g b` / `g c` | status / branches / commits |
 | `]h` / `[h` | next / previous hunk |
 | `Space g p` / `g a` / `g r` | preview / stage / reset hunk |
 

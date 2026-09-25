@@ -28,7 +28,7 @@ can actually own.
 
 ```console
 $ nvim
-[lazy.nvim ]  6/41 plugins · 30ms
+[lazy.nvim ]  4/43 plugins · 29ms
 [mason     ]  69 tools armed
 [treesitter]  79 parsers compiled
 [nyanvim   ]  ready.  > ^ <
@@ -86,17 +86,17 @@ nvim
 
 | Needed | For |
 |--------|-----|
-| **Neovim 0.11+** | `vim.lsp.config`, Telescope. Distro packages are often older; use the [official release](https://github.com/neovim/neovim/releases). |
-| git, Node.js, ripgrep (`rg`), fd | plugins, LSP servers, Telescope search |
+| **Neovim 0.11+** | `vim.lsp.config`. Distro packages are often older; use the [official release](https://github.com/neovim/neovim/releases). |
+| git, fzf, ripgrep (`rg`), Node.js, fd | plugins, pickers, live grep, LSP servers |
 | a C compiler and the `tree-sitter` CLI | compiling Treesitter parsers (`brew install tree-sitter`, `cargo install tree-sitter-cli` or `npm i -g tree-sitter-cli`) |
 | a [Nerd Font](https://www.nerdfonts.com/) | icons |
 | `claude`, `opencode`, `ollama` | optional, for the AI keys |
 
 ## What it looks like
 
-| Editing, with the file tree | Telescope |
-|-----------------------------|-----------|
-| ![Editing a Lua file with the file tree open](assets/screenshots/ide-view.png) | ![Telescope find files with preview](assets/screenshots/telescope.png) |
+| Editing, with the file tree | Find files |
+|-----------------------------|------------|
+| ![Editing a Lua file with the file tree open](assets/screenshots/ide-view.png) | ![Find files with preview](assets/screenshots/telescope.png) |
 
 | LSP hover | Theme picker |
 |-----------|--------------|
@@ -146,14 +146,14 @@ Like LunarVim's `Space L`: everything about the config under one key.
 
 | Area | Plugins | Notes |
 |------|---------|-------|
-| Plugin manager | [lazy.nvim](https://github.com/folke/lazy.nvim) | 41 plugins, 6 load at startup, the rest on `event`/`cmd`/`keys`. `:Lazy profile` shows the breakdown. |
+| Plugin manager | [lazy.nvim](https://github.com/folke/lazy.nvim) | 43 plugins, 4 load at startup, the rest on `event`/`cmd`/`keys`. `:Lazy profile` shows the breakdown. |
 | LSP | mason, mason-lspconfig v2, nvim-lspconfig | Neovim 0.11 `vim.lsp.config` API. Lua, Python, TypeScript, Rust, JSON, HTML, CSS pre-installed; anything you add in `:Mason` is enabled automatically. Inline diagnostics on. |
 | Completion | nvim-cmp, LuaSnip, friendly-snippets, lspkind | Tab through snippets, bordered docs. |
 | Syntax | nvim-treesitter (`main`) | Highlight and indent; 19 parsers install themselves on first launch. |
-| Finding | Telescope, fzf-native, project.nvim, neoclip | Files, grep, symbols, projects, yank history, keymaps. |
+| Finding | fzf-lua, project.nvim, neoclip | Files, grep, symbols, projects, yank history, keymaps; `vim.ui.select` too. |
 | Files and UI | nvim-tree, lualine, bufferline, snacks.nvim, colorizer, illuminate | Tree on the right. snacks supplies notifications, indent guides, `vim.ui.input`. Hex colours show inline. |
 | Git | gitsigns, diffview, lazygit | Blame on the current line, `Space g g` for LazyGit. |
-| Editing | conform, autopairs, Comment.nvim, todo-comments, toggleterm | Format on save with stylua, black, prettier; LSP fallback when a formatter is missing. |
+| Editing | conform, nvim-lint, autopairs, Comment.nvim, todo-comments, toggleterm | Format on save with stylua, black, prettier; LSP fallback when a formatter is missing. hadolint, markdownlint, ruff when installed. |
 | AI | claudecode.nvim, opencode.nvim, gen.nvim | Claude Code and opencode CLIs in a split, or a local Ollama model. All optional, no API keys in the config. |
 | Discovery | which-key v3 | Group labels only; every mapping lives in one file. |
 | Theme | [nightcity.nvim](https://github.com/kyuna0312/nightcity.nvim) | Night City Mix, four styles, live switcher. |
@@ -252,7 +252,7 @@ lua/config/
   autocmds.lua           autocommands
   which-key.lua          <leader> group labels only
 lua/plugins/             one concern per file, every plugin lazy
-  colorscheme · ui · dashboard · telescope · lsp · conform
+  colorscheme · ui · dashboard · fzf · lsp · conform · lint
   treesitter · editor · which-key · claudecode · ai
 lua/nyanvim/             :Nyan* commands · health · theme picker · discipline
 lua/user/                your overrides (git-ignored)

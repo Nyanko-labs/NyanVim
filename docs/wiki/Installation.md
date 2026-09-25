@@ -4,8 +4,8 @@
 
 | Tool | Why |
 |------|-----|
-| Neovim **0.11+** | `vim.lsp.config`, Telescope. Distro packages are often too old; use the official release. |
-| git, node, ripgrep (`rg`), fd | plugins, LSP servers, Telescope search |
+| Neovim **0.11+** | `vim.lsp.config`. Distro packages are often too old; use the official release. |
+| git, fzf, ripgrep (`rg`), node, fd | plugins, pickers, live grep, LSP servers |
 | a C compiler + `tree-sitter` CLI | compiling Treesitter parsers (`brew install tree-sitter` / `cargo install tree-sitter-cli`) |
 | a [Nerd Font](https://www.nerdfonts.com/) | icons |
 | `claude`, `opencode`, `ollama` | optional, for the AI keys |

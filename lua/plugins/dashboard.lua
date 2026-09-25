@@ -30,7 +30,7 @@ return {
           desc_hl = "String",
           key = "f",
           key_hl = "Number",
-          action = "Telescope find_files",
+          action = "FzfLua files",
         },
         {
           icon = " ",
@@ -39,7 +39,7 @@ return {
           desc_hl = "String",
           key = "r",
           key_hl = "Number",
-          action = "Telescope oldfiles",
+          action = "FzfLua oldfiles",
         },
         {
           icon = " ",
@@ -48,7 +48,7 @@ return {
           desc_hl = "String",
           key = "w",
           key_hl = "Number",
-          action = "Telescope live_grep",
+          action = "FzfLua live_grep",
         },
         {
           icon = " ",
@@ -66,7 +66,7 @@ return {
           desc_hl = "String",
           key = "k",
           key_hl = "Number",
-          action = "Telescope keymaps",
+          action = "FzfLua keymaps",
         },
         {
           icon = " ",

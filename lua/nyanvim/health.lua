@@ -5,14 +5,19 @@ local required_executables = {
   { name = "git", reason = "plugin manager (lazy.nvim)" },
   { name = "node", reason = "JS/TS and Python language servers (optional)", optional = true },
   { name = "npm", reason = "installing those servers (optional)", optional = true },
-  { name = "rg", reason = "Telescope live grep" },
-  { name = "fd", reason = "faster Telescope file search (optional)", optional = true },
+  { name = "fzf", reason = "every picker (fzf-lua)" },
+  { name = "rg", reason = "live grep" },
+  { name = "fd", reason = "file picker (fzf-lua falls back to rg without it)", optional = true },
   { name = "lazygit", reason = "LazyGit integration (optional)", optional = true },
   { name = "tree-sitter", reason = "Treesitter parser installs (nvim-treesitter main branch)" },
   -- formatters conform.nvim expects; without one it falls back to the LSP
   { name = "stylua", reason = "Lua formatting (optional)", optional = true },
   { name = "prettier", reason = "JS/TS/CSS/JSON/Markdown formatting (optional)", optional = true },
   { name = "black", reason = "Python formatting (optional)", optional = true },
+  -- linters nvim-lint runs when present (:Mason installs all three)
+  { name = "hadolint", reason = "Dockerfile lint (optional)", optional = true },
+  { name = "markdownlint-cli2", reason = "Markdown lint (optional)", optional = true },
+  { name = "ruff", reason = "Python lint (optional)", optional = true },
 }
 
 local function check_nvim_version()

@@ -110,7 +110,7 @@ return {
     "folke/todo-comments.nvim",
     dependencies = "nvim-lua/plenary.nvim",
     event = { "BufReadPost", "BufNewFile" },
-    cmd = "TodoTelescope",
+    cmd = "TodoFzfLua",
     config = true,
   },
   { "sindrets/diffview.nvim", dependencies = "nvim-lua/plenary.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
@@ -121,7 +121,7 @@ return {
     "DrKJeff16/project.nvim",
     event = "VeryLazy",
     main = "project",
-    opts = {},
+    opts = { fzf_lua = { enabled = true } }, -- :Project fzf-lua
   },
   { "AckslD/nvim-neoclip.lua", event = "VeryLazy", opts = {} },
 }

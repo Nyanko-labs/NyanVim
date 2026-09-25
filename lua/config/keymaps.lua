@@ -61,50 +61,34 @@ map({ "n", "v" }, "<leader>cf", function()
   require("conform").format({ lsp_format = "fallback" })
 end, { desc = "Format code" })
 
--- File (telescope)
-map("n", "<leader>ff", function()
-  require("telescope.builtin").find_files({ hidden = true })
-end, { desc = "Find files" })
-map("n", "<leader>fg", function()
-  require("telescope.builtin").live_grep({
-    additional_args = function()
-      return { "--hidden" }
-    end,
-  })
-end, { desc = "Live grep" })
-map("n", "<leader>fb", function()
-  require("telescope.builtin").buffers({
-    sort_mru = true,
-    ignore_current_buffer = true,
-  })
-end, { desc = "Find buffers" })
-map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
-map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
-map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps (cheatsheet)" })
-map("n", "<leader>fy", "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", { desc = "Yank history" })
+-- File (fzf-lua)
+map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Find files" })
+map("n", "<leader>fg", "<cmd>FzfLua live_grep<cr>", { desc = "Live grep" })
+map("n", "<leader>fb", "<cmd>FzfLua buffers<cr>", { desc = "Find buffers" })
+map("n", "<leader>fr", "<cmd>FzfLua oldfiles<cr>", { desc = "Recent files" })
+map("n", "<leader>fh", "<cmd>FzfLua helptags<cr>", { desc = "Help tags" })
+map("n", "<leader>fk", "<cmd>FzfLua keymaps<cr>", { desc = "Keymaps (cheatsheet)" })
+map("n", "<leader>fy", function()
+  require("neoclip.fzf")()
+end, { desc = "Yank history" })
 
 -- Search
-map("n", "<leader>sw", "<cmd>Telescope grep_string<cr>", { desc = "Search current word" })
-map("n", "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Search buffer" })
-map("n", "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
-map("n", "<leader>sS", "<cmd>Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols" })
-map("n", "<leader>*", function()
-  require("telescope.builtin").grep_string({
-    word_match = "-w",
-    search = vim.fn.expand("<cword>"),
-    initial_mode = "normal",
-  })
-end, { desc = "Search word under cursor" })
+map("n", "<leader>sw", "<cmd>FzfLua grep_cword<cr>", { desc = "Search current word" })
+map("n", "<leader>sb", "<cmd>FzfLua blines<cr>", { desc = "Search buffer" })
+map("n", "<leader>ss", "<cmd>FzfLua lsp_document_symbols<cr>", { desc = "Document symbols" })
+map("n", "<leader>sS", "<cmd>FzfLua lsp_live_workspace_symbols<cr>", { desc = "Workspace symbols" })
+map("n", "<leader>*", "<cmd>FzfLua grep_cword<cr>", { desc = "Search word under cursor" })
+map("n", "<leader>sr", "<cmd>FzfLua resume<cr>", { desc = "Resume last picker" })
 
 -- Project
-map("n", "<leader>pf", "<cmd>Telescope git_files<cr>", { desc = "Find file" })
-map("n", "<leader>pp", "<cmd>Telescope projects<cr>", { desc = "Switch project" })
-map("n", "<leader>pt", "<cmd>TodoTelescope<cr>", { desc = "Todo list" })
+map("n", "<leader>pf", "<cmd>FzfLua git_files<cr>", { desc = "Find file" })
+map("n", "<leader>pp", "<cmd>Project fzf-lua<cr>", { desc = "Switch project" })
+map("n", "<leader>pt", "<cmd>TodoFzfLua<cr>", { desc = "Todo list" })
 
 -- Git
-map("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git status" })
-map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branches" })
-map("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", { desc = "Git commits" })
+map("n", "<leader>gs", "<cmd>FzfLua git_status<cr>", { desc = "Git status" })
+map("n", "<leader>gb", "<cmd>FzfLua git_branches<cr>", { desc = "Git branches" })
+map("n", "<leader>gc", "<cmd>FzfLua git_commits<cr>", { desc = "Git commits" })
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Diff view" })
 map("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 

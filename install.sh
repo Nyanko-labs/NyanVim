@@ -53,8 +53,9 @@ check_dep "nvim"   "Install from https://neovim.io"
 check_nvim_version
 check_dep "git"    "Install git via your package manager"
 check_dep "rg"     "Install ripgrep: brew/apt/pacman install ripgrep"
+check_dep "fzf"    "Install fzf: brew/apt/pacman install fzf"
 command -v node &>/dev/null || warn "node not found: the JS/TS and Python language servers need it (optional)"
-command -v fd   &>/dev/null || warn "fd not found: Telescope falls back to rg for file search (optional)"
+command -v fd   &>/dev/null || warn "fd not found: the file picker falls back to rg (optional)"
 
 # C compiler check (non-fatal)
 if ! command -v cc &>/dev/null && ! command -v gcc &>/dev/null && ! command -v clang &>/dev/null; then
