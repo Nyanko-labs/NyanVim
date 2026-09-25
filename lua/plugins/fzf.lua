@@ -4,6 +4,8 @@ return {
     cmd = "FzfLua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
+      winopts = { border = "rounded", title_pos = "center", preview = { border = "rounded" } },
+      fzf_colors = true, -- fzf's own colours come from the colorscheme highlights
       -- hidden files show, .gitignore still applies (fd/rg honour it)
       files = { fd_opts = "--color=never --hidden --type f --type l --exclude .git" },
       grep = {

@@ -13,6 +13,23 @@ return {
       -- (extras/<app>/night-city-mix in the palettes repo matches #101a1f).
       transparent = true,
       terminal_colors = true,
+      -- neon accents on top of every style: magenta titles, cyan borders, teal splits
+      on_highlights = function(hl, c)
+        local blend = require("nightcity.util").blend
+        hl.FloatBorder = { fg = c.cyan, bg = c.none }
+        hl.FloatTitle = { fg = c.magenta, bg = c.none, bold = true }
+        hl.WinSeparator = { fg = c.teal }
+        hl.CursorLineNr = { fg = c.magenta, bold = true }
+        hl.LineNr = { fg = c.fg_dim }
+        hl.MatchParen = { fg = c.yellow, bold = true, underline = true }
+        hl.IncSearch = { fg = c.bg_dark, bg = c.magenta, bold = true }
+        hl.Visual = { bg = blend(c.purple, c.bg, 0.3) }
+        hl.DashboardHeader = { fg = c.magenta }
+        hl.DashboardIcon = { fg = c.cyan }
+        hl.DashboardDesc = { fg = c.fg }
+        hl.DashboardKey = { fg = c.pink, bold = true }
+        hl.DashboardFooter = { fg = c.teal }
+      end,
     },
     config = function(_, opts)
       require("nightcity").setup(opts)

@@ -15,11 +15,11 @@ return {
         "  ██║ ╚████║   ██║   ██║  ██║██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║  ",
         "  ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝  ",
         "                                                                    ",
-        "        /\\_/\\  ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋           ",
-        "       ( ^.^ ) ██████████████████████████████████████           ",
-        "        > ^ <  ██ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ██           ",
-        "       /|   |\\  ██████████████████████████████████████           ",
-        "      (_|   |_) ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋           ",
+        "          ▚▚▚   N I G H T   C I T Y   O N L I N E   ▞▞▞          ",
+        "                                                                    ",
+        "        /\\_/\\   ┌──────────────────────────────────────┐          ",
+        "       ( ^.^ )  │  jack in · run code · flatline bugs  │          ",
+        "        > ^ <   └──────────────────────────────────────┘          ",
         "                                                                    ",
       },
       center = {
@@ -98,7 +98,7 @@ return {
           "[lazy.nvim ]  " .. stats.loaded .. "/" .. stats.count .. " plugins · " .. ms .. "ms",
           "[mason     ]  " .. mason .. " tools armed",
           "[treesitter]  " .. parsers .. " parsers compiled",
-          "[nyanvim   ]  ready.  > ^ <",
+          "[nyanvim   ]  jacked in.  > ^ <",
         }
         -- the doom theme centers each line separately; right-pad to equal
         -- width so the bracket columns stay aligned

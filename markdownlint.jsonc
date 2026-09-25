@@ -1,0 +1,10 @@
+// Base rules for nvim-lint's markdownlint (lua/plugins/lint.lua passes --config).
+// A project's own .markdownlint*.jsonc still layers on top. Style-only rules
+// that fire on every README are off; real problems (broken headings, fences) stay.
+{
+  "default": true,
+  "MD013": false, // line length
+  "MD033": false, // inline HTML (badges, <kbd>)
+  "MD041": false, // first line must be a heading (badges come first)
+  "MD060": false  // table column style
+}

@@ -6,6 +6,8 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local lint = require("lint")
+      -- markdownlint: style nags off, see markdownlint.jsonc at the config root
+      lint.linters["markdownlint-cli2"].args = { "--config", vim.fn.stdpath("config") .. "/markdownlint.jsonc", "-" }
       lint.linters_by_ft = {
         dockerfile = { "hadolint" },
         markdown = { "markdownlint-cli2" },

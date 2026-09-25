@@ -31,7 +31,7 @@ $ nvim
 [lazy.nvim ]  4/43 plugins · 29ms
 [mason     ]  69 tools armed
 [treesitter]  79 parsers compiled
-[nyanvim   ]  ready.  > ^ <
+[nyanvim   ]  jacked in.  > ^ <
 ```
 
 ![NyanVim dashboard](assets/screenshots/dashboard.png)

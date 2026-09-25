@@ -37,10 +37,43 @@ return {
     event = "VeryLazy",
     opts = {
       options = {
-        theme = "auto",
-        component_separators = "|",
+        theme = "nightcity",
+        component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         globalstatus = true,
+      },
+      sections = {
+        lualine_a = {
+          {
+            "mode",
+            fmt = function(mode)
+              return "▊ " .. mode
+            end,
+          },
+        },
+        lualine_b = { "branch", "diff" },
+        lualine_c = { { "filename", path = 1 }, "diagnostics" },
+        lualine_x = {
+          {
+            -- Space t f flips it; shown only while on so the bar stays quiet
+            function()
+              return vim.g.nyanvim_autoformat == false and "" or "󰉿 fmt"
+            end,
+            color = { fg = require("nightcity.colors").setup().teal },
+          },
+          {
+            function()
+              local names = {}
+              for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+                names[#names + 1] = client.name
+              end
+              return #names > 0 and (" " .. table.concat(names, " ")) or ""
+            end,
+          },
+          "filetype",
+        },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
       },
     },
   },

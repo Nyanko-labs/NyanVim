@@ -12,7 +12,7 @@ wk.setup({
     },
   },
   win = {
-    border = "single",
+    border = "rounded",
     padding = { 2, 2 },
   },
   show_help = true,
