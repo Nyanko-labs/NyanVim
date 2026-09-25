@@ -5,7 +5,7 @@ set -euo pipefail
 #   install.sh          replace ~/.config/nvim (existing config is backed up)
 #   install.sh --try    install side-by-side as ~/.config/nyanvim; run with
 #                       `NVIM_APPNAME=nyanvim nvim` — your own config is untouched
-REPO_URL="${NYANVIM_REPO:-https://github.com/kyuna0312/NyanVim.git}"
+REPO_URL="${NYANVIM_REPO:-https://github.com/Nyanko-labs/NyanVim.git}"
 APPNAME="nvim"
 [[ "${1:-}" == "--try" ]] && APPNAME="nyanvim"
 NVIM_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/${APPNAME}"

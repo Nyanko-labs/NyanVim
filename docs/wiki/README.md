@@ -10,4 +10,4 @@ NyanVim is a small, fast Neovim setup: IDE features, ~30 ms startup, a live them
 - [Troubleshooting](Troubleshooting.md) — what to check when something is off
 - [Architecture](Architecture.md) — how the config is laid out and why
 
-Website: https://nyanvim.vercel.app · Source: https://github.com/kyuna0312/NyanVim
+Website: https://nyanvim.vercel.app · Source: https://github.com/Nyanko-labs/NyanVim

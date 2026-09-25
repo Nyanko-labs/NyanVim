@@ -1,0 +1,22 @@
+# The three checks CONTRIBUTING.md asks for, run on every push and PR.
+name: ci
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: stylua --check
+        uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check lua init.lua
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+      - name: starts clean, no error message
+        run: |
+          mkdir -p ~/.config && ln -s "$PWD" ~/.config/nvim
+          nvim --headless -c 'lua if vim.v.errmsg ~= "" then error(vim.v.errmsg) end' -c qa!

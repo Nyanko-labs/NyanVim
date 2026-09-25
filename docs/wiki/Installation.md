@@ -15,7 +15,7 @@
 ## Try it without replacing your config
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kyuna0312/NyanVim/main/install.sh | bash -s -- --try
+curl -fsSL https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/install.sh | bash -s -- --try
 NVIM_APPNAME=nyanvim nvim
 ```
 
@@ -24,13 +24,13 @@ This installs to `~/.config/nyanvim` and keeps its plugins, data and cache under
 ## Make it your default
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kyuna0312/NyanVim/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/install.sh | bash
 nvim
 ```
 
 Your existing config, data, state and cache are moved to `*.bak.<timestamp>` first.
 
-Manual equivalent: `git clone https://github.com/kyuna0312/NyanVim.git ~/.config/nvim && nvim`.
+Manual equivalent: `git clone https://github.com/Nyanko-labs/NyanVim.git ~/.config/nvim && nvim`.
 
 ## First launch
 

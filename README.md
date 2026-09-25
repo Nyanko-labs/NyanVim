@@ -8,7 +8,7 @@
 [![Lua](https://img.shields.io/badge/Made%20with-Lua-2bbcd5?style=flat-square&logo=lua&logoColor=white)](https://www.lua.org)
 [![Startup](https://img.shields.io/badge/%E2%9A%A1%20startup-~30ms-f2c74b?style=flat-square)](docs/perf/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-be59d6?style=flat-square)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/kyuna0312/NyanVim?style=flat-square&color=f37c4b)](https://github.com/kyuna0312/NyanVim/stargazers)
+[![Stars](https://img.shields.io/github/stars/Nyanko-labs/NyanVim?style=flat-square&color=f37c4b)](https://github.com/Nyanko-labs/NyanVim/stargazers)
 
 [**nyanvim.vercel.app**](https://nyanvim.vercel.app) · [Docs](docs/wiki/README.md) · [Keymaps](docs/wiki/Keymaps.md) · [Contributing](CONTRIBUTING.md)
 
@@ -19,7 +19,7 @@
 Open it and you have an IDE: file tree, fuzzy finder, language servers,
 completion, Git, a terminal and Claude in a split. The dashboard is up in about
 30 ms because every plugin loads only when you use it. The whole config is
-~1,200 lines of Lua, one plugin per file, so when you want to change something
+~1,300 lines of Lua, one plugin per file, so when you want to change something
 you can find it.
 
 For people who like the polish of [NvChad](https://github.com/NvChad/NvChad)
@@ -56,7 +56,7 @@ $ nvim
 Try it next to your own config. Nothing in `~/.config/nvim` is touched:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kyuna0312/NyanVim/main/install.sh | bash -s -- --try
+curl -fsSL https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/install.sh | bash -s -- --try
 NVIM_APPNAME=nyanvim nvim
 ```
 
@@ -64,7 +64,7 @@ Like it? Make it your default. Your old config, data and cache are moved to
 `*.bak.<timestamp>` first:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kyuna0312/NyanVim/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/install.sh | bash
 nvim
 ```
 
@@ -77,7 +77,7 @@ missing.
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak
-git clone https://github.com/kyuna0312/NyanVim.git ~/.config/nvim
+git clone https://github.com/Nyanko-labs/NyanVim.git ~/.config/nvim
 nvim
 ```
 </details>
@@ -189,7 +189,7 @@ conform spec if you want one. Details in
 
 **Night City Mix** from [night-city-palettes](https://github.com/kyuna0312/night-city-palettes):
 a blue-grey ground with a neon pop, the same palette across tmux, Ghostty,
-kitty, WezTerm and starship in [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
+kitty and starship in [kyuna0312/dotfiles](https://github.com/kyuna0312/dotfiles).
 
 `Space t h` opens the picker: `j`/`k` preview `mix`, `boxuk`, `lucy` and
 `osaka` live, Enter keeps, Esc puts the previous one back. The choice is
@@ -280,7 +280,7 @@ the last error text.
 | Plugins broke after an update | `:Lazy restore` puts back the pinned versions |
 
 More in [docs/wiki/Troubleshooting.md](docs/wiki/Troubleshooting.md). Still
-stuck? [Open an issue](https://github.com/kyuna0312/NyanVim/issues) with
+stuck? [Open an issue](https://github.com/Nyanko-labs/NyanVim/issues) with
 `:NyanHealth`, `:messages` and `nvim --version`.
 
 ## Credits

@@ -7,7 +7,7 @@
 <meta name="description" content="NyanVim: a ready-to-use Neovim config. IDE features, 30 ms startup, live theme switcher, and an installer you can try without replacing your own config.">
 <meta property="og:title" content="NyanVim">
 <meta property="og:description" content="Neovim, ready in 30 milliseconds. Try it next to your own config.">
-<meta property="og:image" content="https://raw.githubusercontent.com/kyuna0312/NyanVim/main/assets/screenshots/dashboard.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/assets/screenshots/dashboard.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐱%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -166,8 +166,8 @@
     <a href="#install">Install</a>
     <a href="#keys">Keys</a>
     <a href="#inside">Inside</a>
-    <a href="https://github.com/kyuna0312/NyanVim/tree/main/docs/wiki">Docs</a>
-    <a href="https://github.com/kyuna0312/NyanVim">GitHub</a>
+    <a href="https://github.com/Nyanko-labs/NyanVim/tree/main/docs/wiki">Docs</a>
+    <a href="https://github.com/Nyanko-labs/NyanVim">GitHub</a>
   </nav>
 
   <section class="term" aria-label="NyanVim dashboard">
@@ -211,17 +211,17 @@
 
   <section class="install" id="install">
     <label for="try">Try it next to your own config. Nothing in <code>~/.config/nvim</code> is touched.</label>
-    <div class="cmd"><code id="try">curl -fsSL https://raw.githubusercontent.com/kyuna0312/NyanVim/main/install.sh | bash -s -- <b>--try</b></code><button type="button" data-copy="try">Copy</button></div>
+    <div class="cmd"><code id="try">curl -fsSL https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/install.sh | bash -s -- <b>--try</b></code><button type="button" data-copy="try">Copy</button></div>
     <div class="cmd"><code id="run">NVIM_APPNAME=nyanvim nvim</code><button type="button" data-copy="run">Copy</button></div>
-    <p class="then">Plugins install themselves on the first launch. Like it? Run the same line without <code>--try</code> to make it your default; your old config is backed up. <a href="https://github.com/kyuna0312/NyanVim#requirements">Requirements</a>: Neovim 0.11+, git, node, ripgrep, fd, a C compiler and a Nerd Font.</p>
+    <p class="then">Plugins install themselves on the first launch. Like it? Run the same line without <code>--try</code> to make it your default; your old config is backed up. <a href="https://github.com/Nyanko-labs/NyanVim#requirements">Requirements</a>: Neovim 0.11+, git, node, ripgrep, fd, a C compiler and a Nerd Font.</p>
   </section>
 
   <h2>What it looks like</h2>
   <div class="shots">
-    <figure><img src="https://raw.githubusercontent.com/kyuna0312/NyanVim/main/assets/screenshots/ide-view.png" alt="NyanVim editing a Lua file with the file tree open on the right" loading="lazy"><figcaption>File tree, statusline, syntax from Treesitter. <kbd>Ctrl b</kbd> toggles the tree.</figcaption></figure>
-    <figure><img src="https://raw.githubusercontent.com/kyuna0312/NyanVim/main/assets/screenshots/telescope.png" alt="Telescope fuzzy finder with a code preview" loading="lazy"><figcaption>Telescope: find files, grep the project, browse keymaps. <kbd>Space f f</kbd></figcaption></figure>
-    <figure><img src="https://raw.githubusercontent.com/kyuna0312/NyanVim/main/assets/screenshots/lsp.png" alt="LSP hover documentation popup over a function" loading="lazy"><figcaption>Seven language servers pre-installed; <kbd>K</kbd> shows docs, <kbd>g d</kbd> jumps to the definition.</figcaption></figure>
-    <figure><img src="https://raw.githubusercontent.com/kyuna0312/NyanVim/main/assets/screenshots/theme.png" alt="Theme picker previewing the Box UK palette" loading="lazy"><figcaption>Theme picker: <kbd>j</kbd>/<kbd>k</kbd> preview live, Enter keeps, Esc puts it back. <kbd>Space t h</kbd></figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/assets/screenshots/ide-view.png" alt="NyanVim editing a Lua file with the file tree open on the right" loading="lazy"><figcaption>File tree, statusline, syntax from Treesitter. <kbd>Ctrl b</kbd> toggles the tree.</figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/assets/screenshots/telescope.png" alt="Telescope fuzzy finder with a code preview" loading="lazy"><figcaption>Telescope: find files, grep the project, browse keymaps. <kbd>Space f f</kbd></figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/assets/screenshots/lsp.png" alt="LSP hover documentation popup over a function" loading="lazy"><figcaption>Seven language servers pre-installed; <kbd>K</kbd> shows docs, <kbd>g d</kbd> jumps to the definition.</figcaption></figure>
+    <figure><img src="https://raw.githubusercontent.com/Nyanko-labs/NyanVim/main/assets/screenshots/theme.png" alt="Theme picker previewing the Box UK palette" loading="lazy"><figcaption>Theme picker: <kbd>j</kbd>/<kbd>k</kbd> preview live, Enter keeps, Esc puts it back. <kbd>Space t h</kbd></figcaption></figure>
   </div>
 
   <h2 id="keys">Your first keys</h2>
@@ -259,10 +259,10 @@
 
   <footer>
     <span>NyanVim by <a href="https://github.com/kyuna0312">kyuna0312</a>, Apache-2.0.</span>
-    <a href="https://github.com/kyuna0312/NyanVim">Source</a>
-    <a href="https://github.com/kyuna0312/NyanVim/tree/main/docs/wiki">Docs</a>
-    <a href="https://github.com/kyuna0312/NyanVim/blob/main/CONTRIBUTING.md">Contributing</a>
-    <a href="https://github.com/kyuna0312/NyanVim/issues">Issues</a>
+    <a href="https://github.com/Nyanko-labs/NyanVim">Source</a>
+    <a href="https://github.com/Nyanko-labs/NyanVim/tree/main/docs/wiki">Docs</a>
+    <a href="https://github.com/Nyanko-labs/NyanVim/blob/main/CONTRIBUTING.md">Contributing</a>
+    <a href="https://github.com/Nyanko-labs/NyanVim/issues">Issues</a>
   </footer>
 </main>
 <script>

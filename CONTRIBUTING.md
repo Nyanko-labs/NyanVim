@@ -1,6 +1,6 @@
 # Contributing to NyanVim
 
-Thanks for helping. NyanVim is deliberately small (~1,200 lines of Lua), so the
+Thanks for helping. NyanVim is deliberately small (~1,300 lines of Lua), so the
 bar for a change is "does this make the editor better for a new user without
 making the config harder to read?".
 
