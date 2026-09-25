@@ -48,10 +48,10 @@ map("n", "K", function()
 end, { desc = "Show hover" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
 map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
-map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 -- Code
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
+map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol" })
 map({ "n", "v" }, "<leader>cf", function()
   require("conform").format({ lsp_format = "fallback" })
 end, { desc = "Format code" })
@@ -112,9 +112,6 @@ map("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 map("n", "<leader>e", function()
   require("nvim-tree.api").tree.toggle()
 end, { desc = "Toggle Explorer" })
-map("n", "<C-b>", function()
-  require("nvim-tree.api").tree.toggle()
-end, { desc = "Toggle Explorer" })
 
 -- Toggle / Theme
 map("n", "<leader>tt", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
@@ -123,11 +120,11 @@ map("n", "<leader>th", function()
 end, { desc = "Theme picker" })
 map("t", "<C-\\>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- opencode
-map({ "n", "x" }, "<leader>oa", function()
+-- opencode (AI group, next to Claude and the local model)
+map({ "n", "x" }, "<leader>ao", function()
   require("opencode").ask("@this: ")
 end, { desc = "Ask opencode" })
-map({ "n", "x" }, "<leader>oo", function()
+map({ "n", "x" }, "<leader>ap", function()
   require("opencode").select()
 end, { desc = "opencode menu" })
 

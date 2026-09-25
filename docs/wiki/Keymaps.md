@@ -22,7 +22,7 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 
 | Key | Action |
 |-----|--------|
-| `Ctrl b` / `Space e` | toggle nvim-tree (right side) |
+| `Space e` / `Space e` | toggle nvim-tree (right side) |
 | `Ctrl h j k l` | move between windows |
 | `Ctrl arrows` | resize |
 | `Alt 1..4` | jump to window N |
@@ -35,7 +35,7 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 |-----|--------|
 | `g d` / `g D` / `g i` / `g r` | definition / declaration / implementation / references |
 | `K` | hover docs |
-| `Space r n` | rename |
+| `Space c r` | rename |
 | `Space c a` | code action |
 | `Space c f` | format (conform, LSP fallback) |
 
@@ -66,7 +66,7 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Space a b` | add current buffer to Claude's context |
 | `Space a a` / `Space a d` | accept / deny Claude's diff |
 | `Space a g` | local LLM prompt (Ollama) |
-| `Space o a` / `Space o o` | ask opencode / opencode menu |
+| `Space a o` / `Space a p` | ask opencode / opencode menu |
 
 ## NyanVim — `Space n`
 

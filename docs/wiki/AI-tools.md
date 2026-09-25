@@ -13,7 +13,7 @@ All optional. Nothing here needs an API key in the config.
 
 ## opencode — `Space o`
 
-[opencode.nvim](https://github.com/NickvanDyke/opencode.nvim) drives the opencode CLI. `Space o a` asks about the current context, `Space o o` opens its menu.
+[opencode.nvim](https://github.com/NickvanDyke/opencode.nvim) drives the opencode CLI. `Space a o` asks about the current context, `Space a p` opens its menu.
 
 ## Local model — `Space a g`
 

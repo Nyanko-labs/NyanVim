@@ -118,12 +118,12 @@ The leader is **Space**. Press it and pause: which-key lists every group.
 |-----|--------|
 | `Space f f` | find a file by name |
 | `Space f g` | search text in the whole project |
-| `Ctrl b` | show or hide the file tree |
+| `Space e` | show or hide the file tree |
 | `Shift h` / `Shift l` | previous / next open file |
 | `g d` · `K` | go to definition · docs under the cursor |
 | `Space c a` | code action: fix, import, refactor |
 | `Space c f` | format the file |
-| `Space r n` | rename symbol everywhere |
+| `Space c r` | rename symbol everywhere |
 | `Space g g` | LazyGit |
 | `Ctrl \` | floating terminal |
 | `Space a c` | Claude Code in a split |
