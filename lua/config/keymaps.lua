@@ -18,12 +18,6 @@ map("n", "<C-Down>", "<cmd>resize -2<CR>", { desc = "Decrease window height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
 
--- Window management (Centaur-style)
-map("n", "<C-x>2", "<cmd>SmartSplit<CR>", { desc = "Split window intelligently" })
-map("n", "<C-x>3", "<cmd>vsplit<CR>", { desc = "Split window vertically" })
-map("n", "<C-x>0", "<cmd>close<CR>", { desc = "Close current window" })
-map("n", "<C-x>o", "<cmd>wincmd w<CR>", { desc = "Next window" })
-
 -- Editing
 map("v", "<", "<gv", { desc = "Indent left" })
 map("v", ">", ">gv", { desc = "Indent right" })
@@ -61,10 +55,6 @@ map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 map({ "n", "v" }, "<leader>cf", function()
   require("conform").format({ lsp_format = "fallback" })
 end, { desc = "Format code" })
-map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" })
-map("n", "<leader>ci", "<cmd>MasonInstall<cr>", { desc = "Mason Install" })
-map("n", "<leader>cu", "<cmd>MasonUninstall<cr>", { desc = "Mason Uninstall" })
-map("n", "<leader>cl", "<cmd>MasonLog<cr>", { desc = "Mason Log" })
 
 -- File (telescope)
 map("n", "<leader>ff", function()
@@ -93,7 +83,6 @@ map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps (cheatshe
 map("n", "<leader>fy", "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", { desc = "Yank history" })
 
 -- Search
-map("n", "<leader>sp", "<cmd>Telescope live_grep<cr>", { desc = "Search in project" })
 map("n", "<leader>sw", "<cmd>Telescope grep_string<cr>", { desc = "Search current word" })
 map("n", "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Search buffer" })
 map("n", "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
@@ -105,14 +94,6 @@ map("n", "<leader>*", function()
     initial_mode = "normal",
   })
 end, { desc = "Search word under cursor" })
-
--- PyCharm/VSCode-style shortcuts
-map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "Search files" })
-map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Search in file" })
-map("n", "<C-S-f>", "<cmd>Telescope live_grep<cr>", { desc = "Search in project" })
-map("n", "<C-e>", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
-map("n", "<C-S-s>", "<cmd>Telescope lsp_document_symbols<cr>", { desc = "Search symbols" })
-map("n", "<C-F12>", "<cmd>Telescope lsp_document_symbols<cr>", { desc = "File structure" })
 
 -- Project
 map("n", "<leader>pf", "<cmd>Telescope git_files<cr>", { desc = "Find file" })
@@ -127,20 +108,13 @@ map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Diff view" })
 map("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 -- Explorer (nvim-tree)
+-- side and width come from nvim-tree's view config (plugins/ui.lua)
 map("n", "<leader>e", function()
-  local api = require("nvim-tree.api")
-  if not api.tree.is_visible() then
-    api.tree.open()
-    vim.cmd("wincmd L")
-    vim.cmd("vertical resize 35")
-  else
-    api.tree.close()
-  end
-end, { desc = "Toggle Explorer (Force Right)" })
+  require("nvim-tree.api").tree.toggle()
+end, { desc = "Toggle Explorer" })
 map("n", "<C-b>", function()
   require("nvim-tree.api").tree.toggle()
 end, { desc = "Toggle Explorer" })
-map("n", "<C-S-e>", "<cmd>NvimTreeFocus<cr>", { desc = "Focus Explorer" })
 
 -- Toggle / Theme
 map("n", "<leader>tt", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
@@ -161,12 +135,8 @@ end, { desc = "opencode menu" })
 map("n", "<leader>nu", "<cmd>NyanUpdate<cr>", { desc = "Update NyanVim" })
 map("n", "<leader>nh", "<cmd>NyanHealth<cr>", { desc = "Health check" })
 map("n", "<leader>nc", "<cmd>NyanConfig<cr>", { desc = "Edit my overrides (lua/user)" })
-map("n", "<leader>nk", "<cmd>Telescope keymaps<cr>", { desc = "Keymaps cheatsheet" })
 map("n", "<leader>nl", "<cmd>Lazy<cr>", { desc = "Plugin manager" })
 map("n", "<leader>nm", "<cmd>Mason<cr>", { desc = "LSP/tool installer" })
-map("n", "<leader>nt", function()
-  require("nyanvim.theme").pick()
-end, { desc = "Theme picker" })
 
 -- Local LLM (ollama via gen.nvim)
 map({ "n", "v" }, "<leader>ag", "<cmd>Gen<cr>", { desc = "Local LLM (ollama)" })

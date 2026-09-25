@@ -52,9 +52,9 @@ info "Checking dependencies..."
 check_dep "nvim"   "Install from https://neovim.io"
 check_nvim_version
 check_dep "git"    "Install git via your package manager"
-check_dep "node"   "Install Node.js from https://nodejs.org"
 check_dep "rg"     "Install ripgrep: brew/apt/pacman install ripgrep"
-check_dep "fd"     "Install fd: brew/apt install fd-find / pacman install fd"
+command -v node &>/dev/null || warn "node not found: the JS/TS and Python language servers need it (optional)"
+command -v fd   &>/dev/null || warn "fd not found: Telescope falls back to rg for file search (optional)"
 
 # C compiler check (non-fatal)
 if ! command -v cc &>/dev/null && ! command -v gcc &>/dev/null && ! command -v clang &>/dev/null; then

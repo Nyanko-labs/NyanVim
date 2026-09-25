@@ -30,17 +30,7 @@ autocmd("BufReadPost", {
 
 autocmd("FileType", {
   group = general,
-  pattern = {
-    "qf",
-    "help",
-    "man",
-    "notify",
-    "lspinfo",
-    "spectre_panel",
-    "startuptime",
-    "tsplayground",
-    "PlenaryTestPopup",
-  },
+  pattern = { "qf", "help", "man", "checkhealth", "lspinfo", "startuptime" },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })

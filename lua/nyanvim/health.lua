@@ -3,10 +3,10 @@ local nyanvim = require("nyanvim")
 
 local required_executables = {
   { name = "git", reason = "plugin manager (lazy.nvim)" },
-  { name = "node", reason = "LSP servers (tsserver, pyright)" },
-  { name = "npm", reason = "LSP server installation" },
+  { name = "node", reason = "JS/TS and Python language servers (optional)", optional = true },
+  { name = "npm", reason = "installing those servers (optional)", optional = true },
   { name = "rg", reason = "Telescope live grep" },
-  { name = "fd", reason = "Telescope file search" },
+  { name = "fd", reason = "faster Telescope file search (optional)", optional = true },
   { name = "lazygit", reason = "LazyGit integration (optional)", optional = true },
   { name = "tree-sitter", reason = "Treesitter parser installs (nvim-treesitter main branch)" },
 }
@@ -60,11 +60,7 @@ end
 
 local function check_nerd_font()
   health.start("Nerd Font")
-  health.warn(
-    "Cannot auto-detect Nerd Font. "
-      .. "If icons look broken, install one from https://www.nerdfonts.com/ "
-      .. "and set it in your terminal."
-  )
+  health.info("If icons look like boxes, set a Nerd Font in your terminal: https://www.nerdfonts.com/")
 end
 
 local M = {}

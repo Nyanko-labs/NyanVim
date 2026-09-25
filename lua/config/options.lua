@@ -1,11 +1,5 @@
 local opt = vim.opt
 
--- Ensure Go binaries are available to Mason/LSP
-local gobin = vim.fn.expand("$HOME/go/bin")
-if not vim.env.PATH:find(gobin, 1, true) then
-  vim.env.PATH = gobin .. ":" .. vim.env.PATH
-end
-
 -- UI
 opt.number = true
 opt.relativenumber = true
@@ -77,7 +71,11 @@ opt.completeopt = "menu,menuone,noselect"
 opt.pumheight = 10
 
 -- Clipboard & mouse
-opt.clipboard = "unnamedplus"
+-- Deferred: probing the clipboard provider at startup costs 50-200 ms over SSH
+-- or without a provider; nothing needs it before the first keystroke.
+vim.schedule(function()
+  opt.clipboard = "unnamedplus"
+end)
 opt.mouse = "a"
 
 -- Wild menu

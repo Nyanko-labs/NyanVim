@@ -50,13 +50,17 @@ end
 
 function M.setup()
   local cmd = vim.api.nvim_create_user_command
-  cmd("NyanUpdate", M.update, { desc = "Update NyanVim (git pull + Lazy sync)" })
+  cmd("NyanUpdate", M.update, { desc = "Update NyanVim (git pull + Lazy restore)" })
   cmd("NyanHealth", "checkhealth nyanvim", { desc = "Check NyanVim requirements" })
   cmd("NyanConfig", M.edit_user_config, { desc = "Edit your personal overrides" })
   -- personal overrides: lua/user/init.lua is git-ignored, so updates never touch it
   local ok, err = pcall(require, "user")
   if not ok and not tostring(err):match("module 'user' not found") then
     vim.notify("lua/user/init.lua failed:\n" .. tostring(err), vim.log.levels.ERROR)
+  end
+  -- the hjkl nag is opt-in: vim.g.nyanvim_cowboy = true in lua/user/init.lua
+  if vim.g.nyanvim_cowboy then
+    require("nyanvim.discipline").cowboy()
   end
 end
 

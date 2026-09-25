@@ -14,3 +14,11 @@
 
 -- Theme: pick with <Space>th; or force one here
 -- vim.cmd.colorscheme("nightcity-lucy")
+
+-- Nag when a motion key is held ("Hold it Cowboy!")
+-- vim.g.nyanvim_cowboy = true
+
+-- Editor-style shortcuts, if your fingers come from VS Code / JetBrains
+-- (they shadow Vim's C-p / C-f / C-e / C-b defaults, which is why they are off)
+-- vim.keymap.set("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "Search files" })
+-- vim.keymap.set("n", "<C-S-f>", "<cmd>Telescope live_grep<cr>", { desc = "Search in project" })

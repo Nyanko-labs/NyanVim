@@ -138,9 +138,7 @@ Like LunarVim's `Space L`: everything about the config under one key.
 | `Space n u` | `:NyanUpdate` | pull the latest NyanVim, restore pinned plugins |
 | `Space n h` | `:NyanHealth` | check Neovim version, tools, compiler |
 | `Space n c` | `:NyanConfig` | open your overrides file (created on first use) |
-| `Space n k` | `:Telescope keymaps` | keymap cheatsheet |
 | `Space n l` · `Space n m` | `:Lazy` · `:Mason` | plugin and LSP-tool managers |
-| `Space n t` | | theme picker |
 
 ## What's inside
 
@@ -157,7 +155,7 @@ Like LunarVim's `Space L`: everything about the config under one key.
 | AI | claudecode.nvim, opencode.nvim, gen.nvim | Claude Code and opencode CLIs in a split, or a local Ollama model. All optional, no API keys in the config. |
 | Discovery | which-key v3 | Group labels only; every mapping lives in one file. |
 | Theme | [nightcity.nvim](https://github.com/kyuna0312/nightcity.nvim) | Night City Mix, four styles, live switcher. |
-| Own code | `lua/nyanvim/` | `:Nyan*` commands, health check, theme picker, the `hjkl` nag. |
+| Own code | `lua/nyanvim/` | `:Nyan*` commands, health check, theme picker, an opt-in `hjkl` nag. |
 
 ## Make it yours
 

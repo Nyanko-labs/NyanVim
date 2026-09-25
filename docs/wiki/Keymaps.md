@@ -17,7 +17,6 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Space s b` | search in the current buffer |
 | `Space s s` / `Space s S` | document / workspace symbols |
 | `Space *` | grep whole word under cursor |
-| `Ctrl p`, `Ctrl f`, `Ctrl e` | VSCode-style: files, search in file, recent |
 
 ## Explorer, windows, buffers
 
@@ -29,7 +28,6 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Alt 1..4` | jump to window N |
 | `Shift h` / `Shift l` | previous / next buffer |
 | `Space b d` / `b o` / `b p` | delete / close others / pick buffer |
-| `Ctrl x 2`, `Ctrl x 3`, `Ctrl x 0` | split (smart), vsplit, close |
 
 ## Code and LSP — `Space c`
 
@@ -40,7 +38,6 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Space r n` | rename |
 | `Space c a` | code action |
 | `Space c f` | format (conform, LSP fallback) |
-| `Space c m` | Mason |
 
 ## Git — `Space g`
 
@@ -78,9 +75,7 @@ Leader is **Space**. Press it and wait: which-key lists the groups. `Space f k` 
 | `Space n u` | `:NyanUpdate` |
 | `Space n h` | `:NyanHealth` |
 | `Space n c` | `:NyanConfig` — your overrides |
-| `Space n k` | keymaps cheatsheet |
 | `Space n l` / `n m` | Lazy / Mason |
-| `Space n t` | theme picker |
 
 ## Editing
 
